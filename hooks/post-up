@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
+  curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
+
+(cd $HOME/.dotfiles/vim/bundle/YouCompleteMe && ./install.sh)
+(cd $HOME/.vim/bundle/ctrlp-cmatcher/ && ./install.sh)
+
+if [ ! -e $HOME/.config/powerline ]; then
+  mkdir -p $HOME/.config/powerline
+  cp -R $HOME/.dotfiles/vim/bundle/powerline/powerline/config_files/* $HOME/.config/powerline
+fi
+
+if [ ! -e $HOME/.oh-my-zsh ]; then
+  git clone --depth 1 https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+fi
+

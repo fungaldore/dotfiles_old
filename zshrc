@@ -1,6 +1,6 @@
 [[ -a ~/.zshrc_before ]] && source ~/.zshrc_before
 
-export ZSH=$HOME/.dotfiles/oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
 
 #export PATH=~/Code/mingw-w32/bin:$PATH
