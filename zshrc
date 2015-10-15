@@ -35,12 +35,12 @@ plugins=(osx git brew zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Powerline path setup
-export PYTHONPATH=$PYTHONPATH:~/.dotfiles/vim/bundle/powerline
-export PATH=$PATH:~/.dotfiles/vim/bundle/powerline/scripts
+export PYTHONPATH=$PYTHONPATH:~/.vim/bundle/powerline
+export PATH=$PATH:~/.vim/bundle/powerline/scripts
 
 # Wire in Powerline
 powerline-daemon -q
-. $HOME/.dotfiles/vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+. $HOME/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Customize to your needs...
 unsetopt auto_name_dirs
@@ -95,7 +95,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 # Direnv
-eval "$(direnv hook $0)"
+eval "$(direnv hook zsh)"
 
 function $$gulp_completion() {
     compls=$(grep -Eho "gulp.task[^,]*" gulpfile.* 2>/dev/null | sed s/'"'/"'"/g | cut -d "'" -f 2 | sort)
