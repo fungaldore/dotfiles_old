@@ -5,7 +5,7 @@ if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 # FIXME: for some reason our `brew install macvim --override-system-vim` doesn't seem to be working
-mvim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
+/usr/local/bin/vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
 
 (cd $HOME/.dotfiles/vim/bundle/YouCompleteMe && ./install.sh)
 (cd $HOME/.vim/bundle/ctrlp-cmatcher/ && ./install.sh)
