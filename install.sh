@@ -96,4 +96,6 @@ fi
 git clone --depth 1 https://hub.k3integrations.com/k3/dotfiles.git $HOME/.dotfiles
 
 env RCRC=$HOME/.dotfiles/rcrc rcup
+export PATH=
+
 

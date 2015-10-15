@@ -3,11 +3,7 @@
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
 
-#export PATH=~/Code/mingw-w32/bin:$PATH
-#export PATH=~/Code/mingw-w32/mingw/bin/:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
-export PATH=$PATH:~/Library/Android/sdk/tools
-export PATH=$PATH:~/Library/Android/sdk/platform-tools
 
 #Setup go
 export GOPATH=$HOME/.go
@@ -34,7 +30,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails osx git textmate ruby lighthouse)
-plugins=(ruby rails osx bundler git brew npm node bower gem zsh-syntax-highlighting)
+plugins=(osx git brew zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
