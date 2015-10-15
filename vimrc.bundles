@@ -1,0 +1,43 @@
+call plug#begin('~/.vim/bundle')
+
+" Define bundles via Github repos
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/syntastic'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-pathogen'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-rails'
+Plug 'benmills/vimux'
+Plug 'jgdavey/vim-turbux'
+Plug 'Lokaltog/powerline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'robbyrussell/oh-my-zsh'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'kchmck/vim-coffee-script'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'mattn/livestyle-vim'
+Plug 'mattn/emmet-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-endwise'
+Plug 'rizzatti/funcoo.vim'
+Plug 'rizzatti/dash.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-dispatch'
+Plug 'gitaltoad/vim-jade'
+Plug 'tpope/vim-projectionist'
+Plug 'honza/vim-snippets'
+Plug 'JazzCore/ctrlp-cmatcher'
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.bundles.local
+endif
+
+call plug#end()
+

@@ -104,9 +104,10 @@ let g:UltiSnipsSnippetsDir         = "~/.vim/UltiSnips"
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 
-"Load Pathogen and plugins
-runtime bundle/pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+"Load vim.plug bundles
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 syntax on
 filetype plugin indent on
 
