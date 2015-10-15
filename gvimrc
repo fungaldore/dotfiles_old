@@ -12,3 +12,9 @@ if has("gui_running")
     set guifont=SauceCodePowerline-Light:h12
   endif
 endif
+
+" Local config
+if filereadable($HOME . "/.gvimrc.local")
+  source ~/.gvimrc.local
+endif
+
