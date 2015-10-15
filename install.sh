@@ -64,6 +64,8 @@ brew_install_or_upgrade 'git'
 brew_install_or_upgrade 'the_silver_searcher'
 brew_install_or_upgrade 'macvim' '--with-override-system-vim'
 brew_install_or_upgrade 'ctags'
+brew_install_or_upgrade 'cmake'
+brew_install_or_upgrade 'direnv'
 brew_install_or_upgrade 'tmux'
 brew_install_or_upgrade 'reattach-to-user-namespace'
 
