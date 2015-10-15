@@ -4,7 +4,18 @@ end
 
 call plug#begin('~/.vim/bundle')
 
+"
 " Define bundles via Github repos
+
+" NERD tree will be loaded on the first invocation of NERDTreeToggle command
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" Run install script for YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+
+" Run install script for ctrlp-cmatcher
+Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
+
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
@@ -13,13 +24,11 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-pathogen'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-rails'
 Plug 'benmills/vimux'
 Plug 'jgdavey/vim-turbux'
 Plug 'Lokaltog/powerline'
 Plug 'altercation/vim-colors-solarized'
-Plug 'robbyrussell/oh-my-zsh'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
@@ -32,12 +41,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-endwise'
 Plug 'rizzatti/funcoo.vim'
 Plug 'rizzatti/dash.vim'
-Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-dispatch'
 Plug 'digitaltoad/vim-jade'
 Plug 'tpope/vim-projectionist'
 Plug 'honza/vim-snippets'
-Plug 'JazzCore/ctrlp-cmatcher'
 Plug 'sjl/vitality.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))

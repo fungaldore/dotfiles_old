@@ -7,9 +7,6 @@ fi
 # FIXME: for some reason our `brew install macvim --override-system-vim` doesn't seem to be working
 vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
 
-(cd $HOME/.vim/bundle/YouCompleteMe && ./install.sh)
-(cd $HOME/.vim/bundle/ctrlp-cmatcher/ && ./install.sh)
-
 if [ ! -e $HOME/.config/powerline ]; then
   mkdir -p $HOME/.config/powerline
   cp -R $HOME/.dotfiles/vim/bundle/powerline/powerline/config_files/* $HOME/.config/powerline
