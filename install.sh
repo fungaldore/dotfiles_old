@@ -44,6 +44,9 @@ brew_tap() {
   brew tap "$1" 2> /dev/null
 }
 
+brew_expand_alias() {
+  brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
+}
 
 #
 # Install Homebrew and dependencies
