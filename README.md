@@ -8,9 +8,13 @@ The current implementation is heavily inspired by [thoughtbot/dotfiles](https://
 
 Install
 -------
-1. `curl -fsS https://hub.k3integrations.com/k3/dotfiles/raw/master/install.sh | sh`
+1.  Install your favorite [powerline font](https://github.com/powerline/fonts)
+    and the [solarized](https://github.com/altercation/solarized) theme for your
+    terminal program of choice. (On OSX you should use iTerm :wink: ). 
+
+1.  `curl -fsS https://hub.k3integrations.com/k3/dotfiles/raw/master/install.sh | sh`
 
     (Be patient, particularly when vim is installing it's plugins.
     The `YouCompleteMe` plugin takes a minute.) 
 
-2. That's it! :sunglasses:
+1. That's it! :sunglasses:
