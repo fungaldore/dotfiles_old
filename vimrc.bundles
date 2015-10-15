@@ -34,6 +34,7 @@ Plug 'digitaltoad/vim-jade'
 Plug 'tpope/vim-projectionist'
 Plug 'honza/vim-snippets'
 Plug 'JazzCore/ctrlp-cmatcher'
+Plug 'sjl/vitality.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
