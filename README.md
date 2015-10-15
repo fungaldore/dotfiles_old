@@ -4,7 +4,7 @@ K3 Dotfiles - README
 This is the K3 dotfiles a number of developers at K3 use. The setup is easy and
 there are many ways to customize it to your needs.
 
-The current implementation is heavily inspired by (thoughtbot/dotfiles)[https://github.com/thoughtbot/dotfiles]
+The current implementation is heavily inspired by [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles)
 
 Install
 -------
