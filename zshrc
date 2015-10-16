@@ -1,4 +1,4 @@
-[[ -a ~/.zshrc_before ]] && source ~/.zshrc_before
+[[ -a ~/.zshrc.before ]] && source ~/.zshrc.before
 
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
@@ -109,5 +109,5 @@ compdef $$gulp_completion gulp
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-[[ -a ~/.zshrc_after ]] && source ~/.zshrc_after
+[[ -a ~/.zshrc.after ]] && source ~/.zshrc.after
 
