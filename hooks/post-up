@@ -9,7 +9,7 @@ vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
 
 if [ ! -e $HOME/.config/powerline ]; then
   mkdir -p $HOME/.config/powerline
-  cp -R $HOME/.dotfiles/vim/bundle/powerline/powerline/config_files/* $HOME/.config/powerline
+  cp -R $HOME/.vim/bundle/powerline/powerline/config_files/* $HOME/.config/powerline
 fi
 
 if [ ! -e $HOME/.oh-my-zsh ]; then
