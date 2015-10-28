@@ -115,7 +115,7 @@ filetype plugin indent on
 set background=dark
 let g:solarized_visibility = 'high'
 colorscheme solarized
-call togglebg#map("<F5>") 
+call togglebg#map("<F5>")
 
 "Fix ugly SignColumn particularly when using gitgutter
 highlight clear SignColumn
