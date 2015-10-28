@@ -1,4 +1,5 @@
 """" Copied from Janus core settings
+
 ""
 "" Basic Setup
 ""
@@ -68,10 +69,9 @@ set directory^=~/.vim/_temp//      " where to put swap files."
 """" Thanks Janus :)
 
 
-
 " UltiSnip Config
 let g:UltiSnipsExpandTrigger       = "<c-j>"
-"let g:UltiSnipsListSnippets        = "<s-tab>"
+" let g:UltiSnipsListSnippets        = "<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit = 'vertical'
@@ -103,8 +103,7 @@ let g:UltiSnipsSnippetsDir         = "~/.vim/UltiSnips"
 " Power Line Config
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-
-"Load vim.plug bundles
+" Load vim.plug bundles
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
@@ -117,7 +116,7 @@ let g:solarized_visibility = 'high'
 colorscheme solarized
 call togglebg#map("<F5>")
 
-"Fix ugly SignColumn particularly when using gitgutter
+" Fix ugly SignColumn particularly when using gitgutter
 highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
 
@@ -125,7 +124,7 @@ autocmd ColorScheme * highlight clear SignColumn
 " Enable Mouse for when I'm feeling lazy
 if has("mouse")
   set mouse=a
-  "set mousehide
+  " set mousehide
 endif
 
 set laststatus=2   " Always show the statusline
@@ -169,7 +168,7 @@ let g:turbux_command_rspec  = 'zeus rspec'
 map <leader>rz :let g:turbux_command_rspec = 'zeus rspec'<cr>
 map <leader>rnz :let g:turbux_command_rspec = 'rspec'<cr>
 
-"when using a dev bulid of zeus
+" when using a dev bulid of zeus
 map <leader>rlz :let g:turbux_command_rspec = '~/.go/src/github.com/burke/zeus/build/zeus rspec'<cr>
 
 map <leader>R :w<cr>:VimuxPromptCommand<cr>
@@ -207,7 +206,7 @@ let g:rails_projections = {
 autocmd BufRead,BufNewFile *.ngt setlocal filetype=html
 
 " Don't wait so long for key sequences
-"set timeout timeoutlen=150
+" set timeout timeoutlen=150
 
 " Vim can get really slow when it has to syntax highlight long lines
 " Limiting the syntax highlight length speeds things up
