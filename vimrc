@@ -77,29 +77,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsSnippetsDir         = "~/.vim/UltiSnips"
 
-"function! g:UltiSnips_Complete()
-    "call UltiSnips_ExpandSnippet()
-    "if g:ulti_expand_res == 0
-        "if pumvisible()
-            "return "\<C-n>"
-        "else
-            "call UltiSnips_JumpForwards()
-            "if g:ulti_jump_forwards_res == 0
-               "return "\<TAB>"
-            "endif
-        "endif
-    "endif
-    "return ""
-"endfunction
-
-"au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" YouCompleteMe config
-"let g:ycm_semantic_triggers =  {
-  "\   'coffee' : ['.'],
-  "\ }
-
-
 " Power Line Config
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
@@ -128,12 +105,10 @@ if has("mouse")
 endif
 
 set laststatus=2   " Always show the statusline
-set nocompatible   " Disable vi-compatibility
 set encoding=utf-8 " Necessary to show unicode glyphs
 
 set ttymouse=xterm2
 
-set laststatus=2 " display status line in all windows
 set noshowmode " Hide the default mode text, powerline already does
 
 set colorcolumn=80
