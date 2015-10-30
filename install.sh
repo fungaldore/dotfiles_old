@@ -83,6 +83,9 @@ if ! command -v rcup >/dev/null; then
   brew_install_or_upgrade 'rcm'
 fi
 
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 #
 # Allow users to provide their own set of scripts
@@ -102,5 +105,4 @@ fi
 
 env RCRC=$HOME/.dotfiles/rcrc rcup
 export PATH=
-
 
