@@ -1,0 +1,6 @@
+alias phone_web='adb forward tcp:9222 localabstract:chrome_devtools_remote'
+alias nt='tmux new -s ${PWD##*/}'
+
+# Local config
+[[ -a ~/.aliases.local ]] && source ~/.aliases.local
+

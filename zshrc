@@ -30,7 +30,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails osx git textmate ruby lighthouse)
-plugins=(osx git brew zsh-syntax-highlighting)
+plugins=(fasd osx git brew zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -45,66 +45,7 @@ powerline-daemon -q
 # Customize to your needs...
 unsetopt auto_name_dirs
 
-function r() {
-  cd ~/code/$1;
-  gvim app/controllers/application_controller.rb
-  guard -c
-}
-
-function c() {
-  cd ~/code/$1;
-}
-
-function nct() {
-  cd ~/code/$1;
-  $name=${PWD##*/}
-  tmux new -s $name 'vim .' -d
-  tmux -t $name new-window -n 'term'
-  tmux select-window -t $name:1
-}
-
-function nrt() {
-  cd ~/code/$1;
-  name=${PWD##*/}
-  tmux new -d -s $name -n 'vim' 'vim .'
-  tmux new-window -t $name -n 'zeus' 'zsh -c zeus start'
-  tmux new-window -t $name -n 'console' 'zsh -c zeus rails c'
-  tmux new-window -t $name -n 'server' 'zsh -c zeus rails s'
-  tmux new-window -t $name -n 'log' 'zsh -c tail -f log/development.log'
-  tmux move-window -t $name -r -s 'zeus' -t 'log'
-  tmux select-window -t 'vim'
-  tmux attach -t $name
-}
-
-compdef '_files -W ~/code -/' c r nct nrt
-
-alias phone_web='adb forward tcp:9222 localabstract:chrome_devtools_remote'
-alias nt='tmux new -s ${PWD##*/}'
-
-alias z='zeus'
-alias zeus='nocorrect zeus'
-
-#Ruby performance
-#export RUBY_GC_MALLOC_LIMIT=60000000
-#export RUBY_FREE_MIN=200000
-
-# load rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-#Autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
-# Direnv
-eval "$(direnv hook zsh)"
-
-function $$gulp_completion() {
-    compls=$(grep -Eho "gulp.task[^,]*" gulpfile.* 2>/dev/null | sed s/'"'/"'"/g | cut -d "'" -f 2 | sort)
-
-    completions=(${=compls})
-    compadd -- $completions
-}
-
-compdef $$gulp_completion gulp
+[[ -a ~/.aliases ]] && source ~/.aliases
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
