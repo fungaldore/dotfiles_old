@@ -16,7 +16,7 @@ Install
 
 1.  `curl -fsS https://hub.k3integrations.com/k3/dotfiles/raw/master/install.sh | sh`
 
-    (Be patient, particularly when vim is installing it's plugins.
+    (Be patient, particularly when vim is installing its plugins.
     The `YouCompleteMe` plugin takes a minute.)
 
 1. That's it! :sunglasses:
