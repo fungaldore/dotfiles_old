@@ -89,8 +89,8 @@ fi
 
 #
 # Allow users to provide their own set of scripts
-if [ -f "$HOME/.dotfiles-local/install.sh" ]; then
-  . "$HOME/.dotfiles-local/install.sh"
+if [ -f "$HOME/.dotfiles.local/install.sh" ]; then
+  . "$HOME/.dotfiles.local/install.sh"
 fi
 
 
