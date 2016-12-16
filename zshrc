@@ -47,6 +47,12 @@ unsetopt auto_name_dirs
 
 [[ -a ~/.aliases ]] && source ~/.aliases
 
+#Fasd
+eval "$(fasd --init auto)"
+
+# Direnv
+eval "$(direnv hook zsh)"
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 

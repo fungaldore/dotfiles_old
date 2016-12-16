@@ -111,7 +111,7 @@ else
   git clone --depth 1 https://hub.k3integrations.com/k3/dotfiles.git $HOME/.dotfiles
 fi
 
-#
+
 # clone typescript-vim plugin to .vim/bundle directory
 git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/bundle/typescript-vim
 
