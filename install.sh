@@ -61,8 +61,16 @@ fi
 
 brew_install_or_upgrade 'zsh'
 brew_install_or_upgrade 'git'
+brew_install_or_upgrade 'fasd'
 brew_install_or_upgrade 'the_silver_searcher'
-brew_install_or_upgrade 'macvim' '--with-override-system-vim'
+#TODO do we need macvim?
+# yes because powerline fonts error otherwise
+# or update python?
+# Be sure to add alias to macvim from brew to zshrc.
+# https://www.google.com/search?q=vim+An+error+occurred+while+importing+powerline+module.&oq=vim+An+error+occurred+while+importing+powerline+module.&aqs=chrome..69i57j0l2.10231j0j1&sourceid=chrome&ie=UTF-8
+# https://github.com/powerline/powerline/issues/1385
+# brew_install_or_upgrade 'macvim' '--with-override-system-vim'
+brew_install_or_upgrade 'macvim'
 brew_install_or_upgrade 'ctags'
 brew_install_or_upgrade 'cmake'
 brew_install_or_upgrade 'direnv'
@@ -102,6 +110,10 @@ if [ -d "$HOME/.dotfiles" ]; then
 else
   git clone --depth 1 https://hub.k3integrations.com/k3/dotfiles.git $HOME/.dotfiles
 fi
+
+#
+# clone typescript-vim plugin to .vim/bundle directory
+git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/bundle/typescript-vim
 
 env RCRC=$HOME/.dotfiles/rcrc rcup
 export PATH=
