@@ -22,3 +22,5 @@ Install
     The `YouCompleteMe` plugin takes a minute.)
 
 1. That's it! :sunglasses:
+
+1. NOTE: the simplified linux specific dot files can be found on the simplified_linux branch.
