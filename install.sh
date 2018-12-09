@@ -108,7 +108,7 @@ if [ -d "$HOME/.dotfiles" ]; then
   echo "Dotfiles already cloned from hub.k3integrations.com/k3/dotfiles.\
     Please  remove and run the script again if you'd like to update to the latest."
 else
-  git clone --depth 1 https://hub.k3integrations.com/k3/dotfiles.git $HOME/.dotfiles
+  git clone --depth 1 https://gitlab.com/calebatyapa/dotfiles.git $HOME/.dotfiles
 fi
 
 
