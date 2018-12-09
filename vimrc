@@ -1,3 +1,11 @@
+" to install plugins using pathogen
+" source: https://gist.github.com/romainl/9970697
+execute pathogen#infect()
+
+"filetype plugin indent on
+"syntax on
+
+
 """" Copied from Janus core settings
 
 ""
@@ -93,6 +101,10 @@ let g:solarized_visibility = 'high'
 colorscheme solarized
 call togglebg#map("<F5>")
 
+" shortcut to change colorscheme to codedark (for vscode terminal)
+nmap <leader>cd :colorscheme codedark<CR>
+nmap <leader>cs :colorscheme solarized<CR>
+
 " Fix ugly SignColumn particularly when using gitgutter
 highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
@@ -133,6 +145,8 @@ vmap <C-j> ]egv
 " NerdTree
 map <leader>n :NERDTreeToggle<CR>
 map <leader>nf :NERDTreeFind<CR>
+let g:NERDTreeWinSize=40
+"let NERDTreeShowHidden=1
 
 " Toggle hl search
 nmap <leader>hs :set hlsearch! hlsearch?<CR>
@@ -142,6 +156,9 @@ set clipboard=unnamed
 let g:turbux_command_rspec  = 'zeus rspec'
 map <leader>rz :let g:turbux_command_rspec = 'zeus rspec'<cr>
 map <leader>rnz :let g:turbux_command_rspec = 'rspec'<cr>
+
+" Runs all specs (no matter what) in chum docker env
+"map <leader>rdz :let g:turbux_command_rspec = 'docker exec -it lms_app_1 bash -c "unset RAILS_ENV; zeus rspec $@"'<cr>
 
 " when using a dev bulid of zeus
 map <leader>rlz :let g:turbux_command_rspec = '~/.go/src/github.com/burke/zeus/build/zeus rspec'<cr>
@@ -185,7 +202,7 @@ autocmd BufRead,BufNewFile *.ngt setlocal filetype=html
 
 " Vim can get really slow when it has to syntax highlight long lines
 " Limiting the syntax highlight length speeds things up
-set synmaxcol=120
+set synmaxcol=200
 
 " Use the silver searcher as replacement for Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -217,3 +234,54 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
+
+" Toggle text wrapping
+map <leader>sw :set wrap!<CR>
+
+" Clear whitespace from entire file
+map <leader>ws :%s/\s\+$//<CR>
+
+" Clear trailing whitespace and replace preceding tabs with double spaces
+map <leader>ts :%s/	/  /g<CR>:%s/\s\+$//<CR>
+
+" -------- Code Folding --------
+" Make line folding persistent by saving with :mkview and retreiving with :loadview
+" Line folding can be accomplished with v{movement}zf
+map <leader>mv :mkview<CR>
+map <leader>lv :loadview<CR>
+
+" execute when cursor is over a fold {{{ to close the fold
+map <leader>fcl :foldclose<CR>
+" -------- end Code Folding --------
+
+" to blink highlight next search
+nnoremap <silent>n n:call HLNext(0.01)<CR>
+nnoremap <silent>N N:call HLNext(0.01)<CR>
+
+function! HLNext (blinktime)
+  set invcursorline
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  set invcursorline
+  redraw
+endfunction
+
+" --------- typescript compiling ----------
+"let g:typescript_compiler_binary = 'tsc'
+"let g:typescript_compiler_options = ''
+"autocmd QuickFixCmdPost [^l]* nested cwindow
+"autocmd QuickFixCmdPost    l* nested lwindow
+" then, run :make while editing a TypeScript file to execute the tsc compiler and display errors in the QuickFix window
+" source: http://www.blog.bdauria.com/?p=692
+
+" screeps dev
+map <leader>pushscreeps :! push_screeps_code<CR>
+"set shellcmdflag=-ic  " makes ctrl-p not work when set after vim is open, and
+"  opens in background when set in vimrc
+
+
+
+" -- NOTES --
+"  to format json
+"  :%!python -m json.tool
+"
