@@ -229,6 +229,9 @@ let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 " Make ctrlp work with nested git reops
 let g:ctrlp_working_path_mode = 0
 
+" ctrlp-py-matcher setup
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
