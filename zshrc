@@ -170,3 +170,7 @@ alias vi='vim'
 alias python='python3'
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/Users/caleb/Library/Python/2.7/bin:$PATH"
+
+# Hide and show the desktop in mojave
+alias hide_desktop='defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
+alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; killall Finder'
