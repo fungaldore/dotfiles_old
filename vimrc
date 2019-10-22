@@ -102,8 +102,10 @@ colorscheme solarized
 call togglebg#map("<F5>")
 
 " shortcut to change colorscheme to codedark (for vscode terminal)
-nmap <leader>cd :colorscheme codedark<CR>
-nmap <leader>cs :colorscheme solarized<CR>
+nmap <leader>cde :colorscheme default<CR>
+nmap <leader>cds :colorscheme solarized<CR>
+nmap <leader>cdm :colorscheme morning<CR>
+nmap <leader>cdt :colorscheme torte<CR>
 
 " Fix ugly SignColumn particularly when using gitgutter
 highlight clear SignColumn
