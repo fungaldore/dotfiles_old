@@ -28,3 +28,20 @@ alias vim='/usr/local/Cellar/macvim/8.1-151/MacVim.app/Contents/bin/vim'
 # Hide and show the desktop in Catalina
 alias hide_desktop='defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
 alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; killall Finder'
+
+function open_dev_workspace {
+  open -g -a /Applications/Docker.app
+  sleep 1
+  open -g -a /Applications/iTerm.app
+  sleep 1
+  open -g -a /Applications/Visual\ Studio\ Code.app
+  sleep 1
+  open -g -a /Applications/Firefox\ Nightly.app
+  sleep 1
+  open -g -a /Applications/Telegram.app
+  sleep 1
+  open -g -a /Applications/Slack.app
+  sleep 1
+  open -g -a /Applications/Upwork.app
+}
+
