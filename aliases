@@ -1,8 +1,30 @@
+# git
+alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
+alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
+
+# docker
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps --format="table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Command}}\t{{.Ports}}"'
+alias clean_docker_containers='docker ps -aq --no-trunc | xargs docker rm'
+alias clean_docker_images='docker images -qf dangling=true | xargs docker rmi'
+alias clean_docker_volumes='docker volume ls -qf dangling=true | xargs docker volume rm'
+
+function clean_docker {
+  clean_docker_containers
+  clean_docker_images
+  clean_docker_images
+  #TODO clean networks too?
+}
+
+# misc
 alias j='fasd_cd -d'
 alias nt='tmux new -s ${${PWD##*/}//./-}'
 alias ta='tmux attach -t ${${PWD##*/}//./-}'
-alias z='zeus'
 
-# Local config
-[[ -a ~/.aliases.local ]] && source ~/.aliases.local
+# for Catalina - use macvim instead of default vim
+alias vim='/usr/local/Cellar/macvim/8.1-151/MacVim.app/Contents/bin/vim'
 
+# Hide and show the desktop in Catalina
+alias hide_desktop='defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
+alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; killall Finder'

@@ -65,85 +65,10 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # initialize rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# aliases and functions for chum docker, based on John's
-#function dmeval {
-  #eval "$(docker-machine env default)"
-#}
-#dmeval  # John has a cooler method to do this
-
 # docker-compose zsh auto-complete (https://docs.docker.com/compose/completion/#zsh)
 autoload -Uz compinit && compinit -i
 fpath=(~/.zsh/completion $fpath)
 
-alias d='docker'
-alias dc='docker-compose'
-alias dps='docker ps --format="table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Command}}\t{{.Ports}}"'
-alias dcup='dc up'
-alias dcs='dc start'
-alias de='docker exec -it'
-alias da='docker attach'
-
-#alias dgw='docker exec -it lms_app_1 bash -c "cd client; gulp dev"'
-#alias dcon='docker exec -it lms_app_1 rails c'
-#alias dzcon='docker exec -it lms_app_1 bash -c "RAILS_ENV= zeus c"'
-#alias dsh='docker exec -it lms_app_1 bash'
-#alias drake='docker exec -it lms_app_1 rake'
-#alias dz='docker exec -it lms_app_1 bash -c "zeus start"'
-#alias dm='docker-machine'
-
-#function dbb {
-  #docker exec -it $@ byebug -R 5005
-#}
-
-#function zspec {
-  #docker exec -it lms_app_1 bash -c "unset RAILS_ENV; zeus rspec $@"
-#}
-
-# don't forget to run this after `dc up`, otherwise chum and canvas can't talk
-#function init_dns {
-  #docker exec -it lms_app_1 bash -c "echo '172.16.240.128 canvas.chum.dev mail.chum.dev' >> /etc/hosts"
-  #docker exec -it lms_canvas_1 bash -c "echo '172.16.240.128 chum.dev mail.chum.dev' >> /etc/hosts"
-#}
-
-[[ -a ~/.zshrc_after ]] && source ~/.zshrc_after
-
-#function export_ci_compose_vars {
-  #export COMPOSE_FILE=./config/docker/compose-ci.yml
-  #export COMPOSE_PROJECT_NAME=nad/datarolluptest
-  #export image_env=feature
-#}
-
-#function export_production_compose_vars {
-  #export SERVER_ENV=production
-  #export VIRTUAL_HOST=dashboardprod.dev
-  #export CERT_NAME=$VIRTUAL_HOST
-  #export mailname=$VIRTUAL_HOST
-  #export MAIL_HOST=mail
-  #export LETSENCRYPT_HOST=$VIRTUAL_HOST
-  #export LETSENCRYPT_EMAIL=caleb.pope+letsencrypt-$VIRTUAL_HOST@k3integrations.com
-  #export MAIL_HOST=mail
-  #export MAIL_SSL_VERIFY_MODE=none
-  #export NADE_AUTH_SERVER=https://dashboardprod.dev
-  #export nad_dashboard_url=https://dashboardprod.dev
-  #export nad_data_rollup_url=https://datarollupprod.dev
-  #export nad_student_ids_url=https://studentidsprod.dev
-  #export eadventist_pull_time=$eadventist_pull_time_staging
-  #export COMPOSE_FILE=config/docker/compose-production.yml
-  #export MYSQL_PASSWORD=dev
-  #export eadventist_pull_time=
-  #export WEB_CONCURRENCY=8
-#}
-
-alias clean_docker_containers='docker ps -aq --no-trunc | xargs docker rm'
-alias clean_docker_images='docker images -qf dangling=true | xargs docker rmi'
-alias clean_docker_volumes='docker volume ls -qf dangling=true | xargs docker volume rm'
-
-function clean_docker {
-  clean_docker_containers || true
-  clean_docker_images || true
-  clean_docker_volumes || true
-  # need to clean networks too
-}
 
 function push_screeps_code {
   cp ~/workspace/sandbox/screeps/*.js ~/Library/Application\ Support/Screeps/scripts/screeps.com/default/
@@ -151,10 +76,6 @@ function push_screeps_code {
 function pull_screeps_code {
   cp ~/Library/Application\ Support/Screeps/scripts/screeps.com/default/*.js ~/workspace/sandbox/screeps/
 }
-
-# git aliases
-alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
-alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
 
 
 ###-tns-completion-start-###
@@ -164,13 +85,5 @@ fi
 ###-tns-completion-end-###
 
 
-# for osX Mojave - use macvim instead of default vim
-alias vim='/usr/local/Cellar/macvim/8.1-151/MacVim.app/Contents/bin/vim'
-alias vi='vim'
-alias python='python3'
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/Users/caleb/Library/Python/2.7/bin:$PATH"
-
-# Hide and show the desktop in mojave
-alias hide_desktop='defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
-alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; killall Finder'
