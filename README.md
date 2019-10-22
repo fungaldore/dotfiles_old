@@ -1,8 +1,8 @@
 K3 Dotfiles - README
 =======================
 
-This is the K3 dotfiles a number of developers at K3 use. The setup is easy and
-there are many ways to customize it to your needs.
+This is my dotfiles based on an old version of what they use at K3Integrations.
+The setup is easy and there are many ways to customize it to your needs.
 
 The current implementation is heavily inspired by
 [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles) and
@@ -23,4 +23,5 @@ Install
 
 1. That's it! :sunglasses:
 
-1. NOTE: the simplified linux specific dot files can be found on the simplified_linux branch.
+1. NOTE: the other branches mostly have linux in mind with varying levels of
+    complexity.
