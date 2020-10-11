@@ -1,0 +1,143 @@
+// Place your settings in this file to overwrite the default settings
+// To get ligatures and nice fonts: https://github.com/tonsky/FiraCode
+{
+    // Editor customizations
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": false
+    },
+    "editor.parameterHints.enabled": false,
+    "javascript.suggest.autoImports": false,
+    // MIMIMAP
+    // "editor.minimap.enabled": false,
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.maxColumn": 80,
+    "editor.minimap.side": "right",
+    // ZENMODE
+    // "zenMode.centerLayout": false,
+    // "zenMode.fullScreen": false,
+    // "zenMode.hideActivityBar": false,
+    // "zenMode.hideLineNumbers": false,
+    // "zenMode.hideStatusBar": false,
+    "zenMode.hideTabs": false,
+    "clock.dateFormat": "HH:MM:ss - dd",
+    // todo HIGHLIGHTER
+    "todohighlight.defaultStyle": {
+      "color": "white",
+      "backgroundColor": "rgba(100,100,100,0.3)",
+      "border": "1px solid #555555",
+      "borderRadius": "1px"
+    },
+    "todohighlight.keywords": [
+      "STARTHERE",
+      "TODO",
+      "OPTIMIZE",
+      "FIXME",
+      "WIP",
+      "console.log",
+      "byebug",
+      "debugger",
+      "BIRDIETV"
+    ],
+    // "todohighlight.isEnable": false,
+    // saving viewing and editing files
+    // "files.autoSave": "onWindowChange",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "files.trimTrailingWhitespace": true,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [80,120],
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+  // exclude these directorys from search
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "canvas": true,
+      "tmp": true,
+      ".local": true,
+      "log": true,
+      "client/.tmp": true,
+      "public/assets": true
+    },
+    "window.zoomLevel": 0,
+    // TERMINAL
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.scrollback": 10000,
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "diffEditor.renderSideBySide": true,
+    // Gitlens
+    "gitlens.keymap": "alternate",
+    "gitlens.advanced.messages": {
+      "suppressCommitHasNoPreviousCommitWarning": false,
+      "suppressCommitNotFoundWarning": false,
+      "suppressFileNotUnderSourceControlWarning": false,
+      "suppressGitVersionWarning": false,
+      "suppressLineUncommittedWarning": false,
+      "suppressNoRepositoryWarning": false,
+      "suppressResultsExplorerNotice": false,
+      "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
+    "gitlens.mode.active": "zen",
+    // .Net settings
+    "[csharp]": {
+      "editor.tabSize": 4,
+      "editor.detectIndentation": true
+    },
+    "workbench.settings.editor": "json",
+    "workbench.settings.useSplitJSON": false,
+    "breadcrumbs.enabled": true,
+    "editor.renderControlCharacters": false,
+    "terminal.integrated.rendererType": "dom",
+    // FONTS
+    "terminal.integrated.fontSize": 14,
+    // "terminal.integrated.fontFamily": "Iosevka",
+    "terminal.integrated.fontFamily": "FiraCode-retina",
+    "editor.fontSize": 14,
+    // "editor.fontFamily": "Iosevka",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontWeight": "400",
+    // "editor.fontFamily": "FiraFlott",
+    "editor.fontLigatures": true,
+    "editor.tokenColorCustomizations": {
+      "textMateRules": [
+        {
+          "scope": [
+            //following will be in italic (=FlottFlott)
+            "comment",
+            // "entity.name.type.class", //class names
+            // "keyword", //import, export, return…
+            // "constant", //String, Number, Boolean…, this, super
+            // "storage.modifier", //static keyword
+            // "storage.type.class.js", //class keyword
+          ],
+          "settings": {
+            "fontStyle": "italic"
+          }
+        },
+        {
+          "scope": [
+            //following will be excluded from italics (VSCode has some defaults for italics)
+            "invalid",
+            "keyword.operator",
+            "constant.numeric.css",
+            "keyword.other.unit.px.css",
+            "constant.numeric.decimal.js",
+            "constant.numeric.json"
+          ],
+          "settings": {
+            "fontStyle": ""
+          }
+        }
+      ]
+    },
+    "workbench.activityBar.visible": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "breadcrumbs.enabled": false,
+    "workbench.colorTheme": "Material Theme Palenight"
+  }

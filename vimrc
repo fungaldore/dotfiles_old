@@ -17,6 +17,7 @@ set number            " Show line numbers
 set ruler             " Show line and column number
 syntax enable         " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8    " Set default encoding to UTF-8
+set pastetoggle=<F3>
 
 ""
 "" Whitespace
@@ -97,15 +98,9 @@ filetype plugin indent on
 
 " Setup Solarized
 set background=dark
-let g:solarized_visibility = 'high'
-colorscheme solarized
+"let g:solarized_visibility = 'high'
+colorscheme fogbell
 call togglebg#map("<F5>")
-
-" shortcut to change colorscheme to codedark (for vscode terminal)
-nmap <leader>cde :colorscheme default<CR>
-nmap <leader>cds :colorscheme solarized<CR>
-nmap <leader>cdm :colorscheme morning<CR>
-nmap <leader>cdt :colorscheme torte<CR>
 
 " Fix ugly SignColumn particularly when using gitgutter
 highlight clear SignColumn
@@ -121,11 +116,15 @@ endif
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 
-set ttymouse=xterm2
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 
 set noshowmode " Hide the default mode text, powerline already does
 
-set colorcolumn=80
+set colorcolumn=80,120
 
 " Keep cursor from edge
 set sidescroll=1
@@ -134,7 +133,7 @@ set sidescrolloff=5
 """" MAPPINGS
 
 " Fugitive
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :Git<CR>
 
 " Text Bubbling
 " Bubble single lines
@@ -147,7 +146,7 @@ vmap <C-j> ]egv
 " NerdTree
 map <leader>n :NERDTreeToggle<CR>
 map <leader>nf :NERDTreeFind<CR>
-let g:NERDTreeWinSize=40
+let g:NERDTreeWinSize=50
 "let NERDTreeShowHidden=1
 
 " Toggle hl search
@@ -208,6 +207,8 @@ set synmaxcol=200
 
 " Use the silver searcher as replacement for Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
+" quick start to search in app directory
+nnoremap <Leader>a :Ack!<Space>''<Space>app<Left><Left><Left><Left><Left>
 
 let g:user_emmet_settings = {
 \  'indentation' : '  ',
@@ -223,6 +224,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore "**/*.pyc"
       \ --ignore "tmp/*"
       \ --ignore "log/*"
+      \ --ignore "node_modules"
       \ -g ""'
 
 " Make ctrlp search faster
@@ -277,6 +279,17 @@ endfunction
 map <leader>pushscreeps :! push_screeps_code<CR>
 "set shellcmdflag=-ic  " makes ctrl-p not work when set after vim is open, and
 "  opens in background when set in vimrc
+
+
+nnoremap <Leader>r1 :res10<CR>
+nnoremap <Leader>r2 :res20<CR>
+nnoremap <Leader>r3 :res30<CR>
+nnoremap <Leader>r4 :res40<CR>
+nnoremap <Leader>r5 :res50<CR>
+nnoremap <Leader>r6 :res60<CR>
+nnoremap <Leader>r7 :res70<CR>
+nnoremap <Leader>r8 :res80<CR>
+nnoremap <Leader>r9 :res90<CR>
 
 
 

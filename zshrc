@@ -1,9 +1,7 @@
-[[ -a ~/.zshrc.before ]] && source ~/.zshrc.before
-
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
 
-export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=/snap/bin:~/bin:/usr/local/share/npm/bin:$PATH
 
 #Setup go
 export GOPATH=$HOME/.go
@@ -30,7 +28,8 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails osx git textmate ruby lighthouse)
-plugins=(fasd osx git brew zsh-syntax-highlighting docker)
+#plugins=(fasd osx git brew zsh-syntax-highlighting docker)
+plugins=(git fasd zsh-syntax-highlighting docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,27 +55,16 @@ eval "$(direnv hook zsh)"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-[[ -a ~/.zshrc.after ]] && source ~/.zshrc.after
-
-
-
 # initialize rvm
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # initialize rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# initialize node version manager
+source /usr/share/nvm/init-nvm.sh
 
 # docker-compose zsh auto-complete (https://docs.docker.com/compose/completion/#zsh)
 autoload -Uz compinit && compinit -i
 fpath=(~/.zsh/completion $fpath)
-
-
-function push_screeps_code {
-  cp ~/workspace/sandbox/screeps/*.js ~/Library/Application\ Support/Screeps/scripts/screeps.com/default/
-}
-function pull_screeps_code {
-  cp ~/Library/Application\ Support/Screeps/scripts/screeps.com/default/*.js ~/workspace/sandbox/screeps/
-}
-
 
 ###-tns-completion-start-###
 if [ -f /Users/caleb/.tnsrc ]; then
@@ -85,5 +73,41 @@ fi
 ###-tns-completion-end-###
 
 
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="/Users/caleb/Library/Python/2.7/bin:$PATH"
+###############################################################################
+### Custom simple prompt
+# inspiration: https://github.com/andrew8088/dotfiles/blob/master/zsh/zfunctions/prompt_pure_setup
+###############################################################################
+
+#PROMPT=' %F{yellow}%n%F{green}@%F{yellow}%m  %F{green}%~ %F{red}❯%f '
+
+# sample prompt codes
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+#
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+#
+# terminal codes:
+# \e7   => save cursor position
+# \e[2A => move cursor 2 lines up
+# \e[1G => go to position 1 in terminal
+# \e8   => restore cursor position
+# \e[K  => clears everything after the cursor on the current line
+# \e[2K => clear everything on the current line
+
+###############################################################################
+
+# NOTES:
+# to make skyrim run in the background (for arrow farming)
+# edit /home/caleb/.local/share/Steam/steamapps/compatdata/489830/pfx/drive_c/users/steamuser/My Documents/My Games/Skyrim Special Edition/Skyrim.ini
+# Append bAlwaysActive=1 to [General]
+#
+# Disable alt opening menu on firefox
+# https://www.reddit.com/r/firefox/comments/6l5ioi/how_can_i_disable_pressing_alt_bringing_up_menu/

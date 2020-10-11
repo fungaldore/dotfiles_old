@@ -1,21 +1,19 @@
 # git
 alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
 alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
+alias gcoc='gco . && git clean -fd'
+function gstaa {
+	git stash apply stash@{$1}
+}
 
 # docker
 alias d='docker'
 alias dc='docker-compose'
-alias dps='docker ps --format="table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Command}}\t{{.Ports}}"'
+alias dps='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Command}}\t{{.Ports}}"'
 alias clean_docker_containers='docker ps -aq --no-trunc | xargs docker rm'
 alias clean_docker_images='docker images -qf dangling=true | xargs docker rmi'
 alias clean_docker_volumes='docker volume ls -qf dangling=true | xargs docker volume rm'
-
-function clean_docker {
-  clean_docker_containers
-  clean_docker_images
-  clean_docker_images
-  #TODO clean networks too?
-}
+alias clean_docker="clean_docker_containers; clean_docker_images; clean_docker_images"
 
 # misc
 alias j='fasd_cd -d'
@@ -25,23 +23,40 @@ alias ta='tmux attach -t ${${PWD##*/}//./-}'
 # for Catalina - use macvim instead of default vim
 alias vim='/usr/local/Cellar/macvim/8.1-151/MacVim.app/Contents/bin/vim'
 
-# Hide and show the desktop in Catalina
-alias hide_desktop='defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
-alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; killall Finder'
+# loope
+alias curl_loope_function='curl https://us-central1-loop-60b76.cloudfunctions.net/sendTimelineEventNotification'
+alias deploy_loope_function='firebase deploy --only functions:sendTimelineEventNotification'
+alias deployloope='date ; deploy_loope_function ; date ; sleep 30 ; echo "curling" ; curl_loope_function ; date'
 
-function open_dev_workspace {
-  open -g -a /Applications/Docker.app
-  sleep 1
-  open -g -a /Applications/iTerm.app
-  sleep 1
-  open -g -a /Applications/Visual\ Studio\ Code.app
-  sleep 1
-  open -g -a /Applications/Firefox\ Nightly.app
-  sleep 1
-  open -g -a /Applications/Telegram.app
-  sleep 1
-  open -g -a /Applications/Slack.app
-  sleep 1
-  open -g -a /Applications/Upwork.app
-}
+# mac system
+if [ "$(uname)" == "Darwin" ]; then
+	# Hide and show the desktop in Catalina
+	alias hide_desktop='defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
+	alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; killall Finder'
+
+	function open_dev_workspace {
+		open -g -a /Applications/Docker.app
+		sleep 1
+		open -g -a /Applications/iTerm.app
+		sleep 1
+		open -g -a /Applications/Visual\ Studio\ Code.app
+		sleep 1
+		open -g -a /Applications/Firefox\ Nightly.app
+		sleep 1
+		open -g -a /Applications/Telegram.app
+		sleep 1
+		open -g -a /Applications/Slack.app
+		sleep 1
+		open -g -a /Applications/Upwork.app
+	}
+fi
+
+# manjaro system
+if [ "$(uname)" == "Linux" ]; then
+	alias b_2='xrandr --output DP-2 --brightness 0.2'
+	alias b_5='xrandr --output DP-2 --brightness 0.5'
+	alias b_7='xrandr --output DP-2 --brightness 0.7'
+	alias b_8='xrandr --output DP-2 --brightness 0.8'
+	alias b_10='xrandr --output DP-2 --brightness 1.0'
+fi
 
