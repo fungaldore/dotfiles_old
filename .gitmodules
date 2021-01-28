@@ -112,3 +112,6 @@
 [submodule "vim/bundle/fogbell.vim"]
 	path = vim/bundle/fogbell.vim
 	url = https://github.com/jaredgorski/fogbell.vim.git
+[submodule "vim/bundle/vim-slim"]
+	path = vim/bundle/vim-slim
+	url = https://github.com/slim-template/vim-slim.git
