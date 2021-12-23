@@ -96,15 +96,20 @@ endif
 syntax on
 filetype plugin indent on
 
+"""""""""""""" Colors """"""""""""""
 " Setup Solarized
 set background=dark
-"let g:solarized_visibility = 'high'
-colorscheme fogbell
+let g:solarized_visibility = 'high'
+colorscheme solarized
 call togglebg#map("<F5>")
 
 " Fix ugly SignColumn particularly when using gitgutter
 highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
+
+nmap <leader>cfl :colorscheme fogbell_light<CR>
+nmap <leader>cfd :colorscheme fogbell<CR>
+nmap <leader>csd :colorscheme solarized<CR>
 
 
 " Enable Mouse for when I'm feeling lazy
@@ -215,6 +220,7 @@ let g:user_emmet_settings = {
 \}
 let g:emmet_html5 = 1
 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 " Make ctrlp indexing faster
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
@@ -228,13 +234,13 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ -g ""'
 
 " Make ctrlp search faster
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 " Make ctrlp work with nested git reops
 let g:ctrlp_working_path_mode = 0
 
 " ctrlp-py-matcher setup
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Toggle text wrapping
 map <leader>sw :set wrap!<CR>
@@ -248,16 +254,16 @@ map <leader>ts :%s/	/  /g<CR>:%s/\s\+$//<CR>
 " -------- Code Folding --------
 " Make line folding persistent by saving with :mkview and retreiving with :loadview
 " Line folding can be accomplished with v{movement}zf
-map <leader>mv :mkview<CR>
-map <leader>lv :loadview<CR>
+"map <leader>mv :mkview<CR>
+"map <leader>lv :loadview<CR>
 
 " execute when cursor is over a fold {{{ to close the fold
-map <leader>fcl :foldclose<CR>
+"map <leader>fcl :foldclose<CR>
 " -------- end Code Folding --------
 
 " to blink highlight next search
-nnoremap <silent>n n:call HLNext(0.01)<CR>
-nnoremap <silent>N N:call HLNext(0.01)<CR>
+nnoremap <silent>n n:call HLNext(0.03)<CR>
+nnoremap <silent>N N:call HLNext(0.03)<CR>
 
 function! HLNext (blinktime)
   set invcursorline
