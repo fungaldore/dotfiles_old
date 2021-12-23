@@ -22,6 +22,26 @@ alias nri='rm -rf node_modules && npm install'
 alias nris='rm -rf node_modules && npm install && npm start'
 alias nri-l='rm node_modules ; ni-l'
 
+# Find the latest modified file in directory
+#find . -type f -printf '%T@ %p\n' | sort -n | tail -1
+
+#find . -name node_modules -exec touch {}/.nosync \;  # adds .nosync file inside each directory called node_modules
+#NOTE: Not using this because eslint doesn't like the symlinked node_modules
+function ni-l {
+  current_path=`pwd`
+  project_name="$(basename "$current_path")"
+  group_name="$(basename "$(dirname "$current_path")")"
+  node_modules_path="$HOME/workspace/_node_modules_for_all/$group_name/$project_name"
+
+  npm install
+
+  [ -d $node_modules_path/node_modules ] && rm -rf $node_modules_path
+  mkdir -p $node_modules_path
+  mv node_modules $node_modules_path/
+  ln -sF $node_modules_path/node_modules node_modules
+}
+
+
 # misc
 alias j='fasd_cd -d'
 alias nt='tmux new -s ${${PWD##*/}//./-}'
@@ -68,12 +88,89 @@ function open_dev_workspace {
   open -g -a /Applications/Upwork.app
 }
 
-# manjaro system
-if [ "$(uname)" == "Linux" ]; then
-  alias b_2='xrandr --output DP-2 --brightness 0.2'
-  alias b_5='xrandr --output DP-2 --brightness 0.5'
-  alias b_7='xrandr --output DP-2 --brightness 0.7'
-  alias b_8='xrandr --output DP-2 --brightness 0.8'
-  alias b_10='xrandr --output DP-2 --brightness 1.0'
-fi
+# # manjaro system
+# if [ "$(uname)" == "Linux" ]; then
+#   alias b_2='xrandr --output DP-2 --brightness 0.2'
+#   alias b_5='xrandr --output DP-2 --brightness 0.5'
+#   alias b_7='xrandr --output DP-2 --brightness 0.7'
+#   alias b_8='xrandr --output DP-2 --brightness 0.8'
+#   alias b_10='xrandr --output DP-2 --brightness 1.0'
+# fi
 
+# == Material colors ==
+# source: https://github.com/material-theme/vsc-material-theme/blob/master/material-theme.config.json
+# "accents": {
+#   "Acid Lime": "#C6FF00",
+#   "Blue": "#2979FF",
+#   "Breaking Bad": "#388E3C",
+#   "Bright Teal": "#64FFDA",
+#   "Cyan": "#00BCD4",
+#   "Graphite": "#616161",
+#   "Indigo": "#5C6BC0",
+#   "Lime": "#7CB342",
+#   "Orange": "#FF7042",
+#   "Pink": "#FF4081",
+#   "Purple": "#AB47BC",
+#   "Red": "#E57373",
+#   "Sky": "#84FFFF",
+#   "Tomato": "#F44336",
+#   "Teal": "#80CBC4",
+#   "Yellow": "#FFA000"
+# },
+
+
+# == Palenight colors ==
+# source https://github.com/material-theme/vsc-material-theme/blob/master/scripts/generator/settings/specific/palenight.ts
+#
+# export default {
+#   id: 'material.theme.palenight',
+#   name: 'Material-Theme-Palenight',
+#   type: 'dark',
+#   scheme: {
+#     defaultAccent: '#80CBC4',
+#     background: '#292D3E',
+#     backgroundAlt: '#292D3E',
+#     contrastBorder: '#292D3E',
+#     comments: '#676E95',
+#     caret: '#FFCC00',
+#     findHighlight: '#FFCC00',
+#     foreground: '#A6ACCD',
+#     focusBorder: '#FFFFFF',
+#     guides: '#4E5579',
+#     lineNumbers: '#3A3F58',
+#     invisibles: '#4E5579',
+#     lineHighlight: '#000000',
+#     selection: '#717CB450',
+#     shadow: '#00000030',
+#     inputBackground: '#333747',
+#     inputForeground: '#EEFFFF',
+#     inputBorder: '#FFFFFF10',
+#     scrollbars: '#A6ACCD20',
+#     scrollbarsHover: '#A6ACCD10',
+#     statusbarForeground: '#676E95',
+#     sidebarBackground: '#292D3E',
+#     sidebarForeground: '#676E95',
+#     listHoverForeground: '#FFFFFF',
+#     listHoverBackground: '#292D3E',
+#     tabActiveForeground: '#FFFFFF',
+#     inactiveSelectionBackground: '#00000030',
+#     findMatchBackground: '#000000',
+#     findMatchHighlightBackground: '#00000050',
+#     findMatchHighlightBorder: '#ffffff30',
+#     base: {
+#       white: '#ffffff',
+#       black: '#000000',
+#       red: '#f07178',
+#       orange: '#F78C6C',
+#       yellow: '#FFCB6B',
+#       green: '#C3E88D',
+#       cyan: '#89DDFF',
+#       blue: '#82AAFF',
+#       paleblue: '#B2CCD6',
+#       purple: '#C792EA',
+#       brown: '#916b53',
+#       pink: '#ff9cac',
+#       violet: '#bb80b3'
+#     }
+#   }
+# };

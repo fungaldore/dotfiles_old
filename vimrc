@@ -298,6 +298,11 @@ nnoremap <Leader>r8 :res80<CR>
 nnoremap <Leader>r9 :res90<CR>
 
 
+" Highlight similar words
+nnoremap <Leader>m :exec 'match StatusLineTerm /' . expand('<cword>') . '/'<CR>
+nnoremap <Leader>M :exec 'match '<CR>
+
+
 
 " -- NOTES --
 "  to format json
