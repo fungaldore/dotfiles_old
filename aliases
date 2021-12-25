@@ -5,6 +5,12 @@ alias gcoc='gco . && git clean -fd'
 function gstaa {
   git stash apply stash@{$1}
 }
+function gdu {
+  (
+    git ls-files --others --exclude-standard |
+      while read -r i; do git diff --color -- /dev/null "$i"; done
+  ) | less
+}
 
 # docker
 alias d='docker'
