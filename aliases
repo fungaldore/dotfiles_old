@@ -1,7 +1,7 @@
 # git
 alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
 alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
-alias gcoc='gco . && git clean -fd'
+alias gcoc='git reset && gco . && git clean -fd'
 function gstaa {
   git stash apply stash@{$1}
 }
