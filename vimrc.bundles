@@ -24,15 +24,15 @@ function! InstallCtrlpCmatcher(info)
     !./install.sh
   endif
 endfunction
-Plug 'JazzCore/ctrlp-cmatcher', { 'do': function('InstallCtrlpCmatcher') }
 
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-rails'
 Plug 'benmills/vimux'

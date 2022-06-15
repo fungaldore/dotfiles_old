@@ -118,6 +118,6 @@
 [submodule "vim/bundle/vim-plist"]
 	path = vim/bundle/vim-plist
 	url = https://github.com/darfink/vim-plist.git
-[submodule "vim/bundle/ctrlp-cmatcher"]
-	path = vim/bundle/ctrlp-cmatcher
-	url = https://github.com/JazzCore/ctrlp-cmatcher.git
+[submodule "vim/bundle/ctrlp-py-matcher"]
+	path = vim/bundle/ctrlp-py-matcher
+	url = https://github.com/FelikZ/ctrlp-py-matcher.git
