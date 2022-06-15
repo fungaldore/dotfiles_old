@@ -101,8 +101,8 @@ fi
 if [ "$(uname)" == "Linux" ]; then
   if [ "$(uname -r | grep 'MANJARO')" ]; then
     pacman -Syu --noconfirm || \
-			pacman -S --noconfirm sudo || \
-			sudo pacman -Syu --noconfirm
+    pacman -S --noconfirm sudo || \
+    sudo pacman -Syu --noconfirm
     sudo pacman -S --noconfirm vim tmux zsh git curl the_silver_searcher \
       ctags cmake python which fasd
 
