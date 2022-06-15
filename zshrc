@@ -1,5 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
+export LESS='-FINR'
 
 export PATH=/snap/bin:~/bin:/usr/local/share/npm/bin:$PATH
 
@@ -61,10 +62,11 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # initialize node version manager
 export NVM_DIR="$HOME/.nvm"
+  # Using /opt/homebrew for m1 macs
   # This loads nvm
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
   # This loads nvm bash_completion
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # docker-compose zsh auto-complete (https://docs.docker.com/compose/completion/#zsh)
 autoload -Uz compinit && compinit -i

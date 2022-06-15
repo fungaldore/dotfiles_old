@@ -52,6 +52,12 @@ set incsearch   " incremental searching
 set ignorecase  " searches are case insensitive...
 set smartcase   " ... unless they contain at least one capital letter
 
+" Toggle hl search
+nmap <leader>hs :set hlsearch! hlsearch?<CR>
+
+" Search without moving page
+nnoremap <Leader>/ :let @/=""<Left>
+
 ""
 "" Wild settings
 ""
@@ -107,8 +113,9 @@ call togglebg#map("<F5>")
 highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
 
-nmap <leader>cfl :colorscheme fogbell_light<CR>
 nmap <leader>cfd :colorscheme fogbell<CR>
+nmap <leader>cfl :colorscheme fogbell_light<CR>
+nmap <leader>cfi :colorscheme fogbell_lite<CR>
 nmap <leader>csd :colorscheme solarized<CR>
 
 
@@ -139,6 +146,8 @@ set sidescrolloff=5
 
 " Fugitive
 nmap <leader>gs :Git<CR>
+" git add current file
+nmap <leader>ga :Git add %:p<CR>
 
 " Text Bubbling
 " Bubble single lines
@@ -153,9 +162,7 @@ map <leader>n :NERDTreeToggle<CR>
 map <leader>nf :NERDTreeFind<CR>
 let g:NERDTreeWinSize=50
 "let NERDTreeShowHidden=1
-
-" Toggle hl search
-nmap <leader>hs :set hlsearch! hlsearch?<CR>
+"let g:NERDTreeWinPos = "right"
 
 " set default clipboard to system
 set clipboard=unnamed
@@ -213,7 +220,8 @@ set synmaxcol=200
 " Use the silver searcher as replacement for Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " quick start to search in app directory
-nnoremap <Leader>a :Ack!<Space>''<Space>app<Left><Left><Left><Left><Left>
+" TODO make this open new tab first
+nnoremap <Leader>a :Ack!<Space>-i<Space>''<Space>src<Left><Left><Left><Left><Left>
 
 let g:user_emmet_settings = {
 \  'indentation' : '  ',
@@ -281,6 +289,17 @@ endfunction
 " then, run :make while editing a TypeScript file to execute the tsc compiler and display errors in the QuickFix window
 " source: http://www.blog.bdauria.com/?p=692
 
+" --------- Prettier ---------
+
+" Format with prettier on command
+nmap <Leader>p :Prettier<CR>
+
+" Autoformat on save
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
+" --------- end Prettier ---------
+
 " screeps dev
 map <leader>pushscreeps :! push_screeps_code<CR>
 "set shellcmdflag=-ic  " makes ctrl-p not work when set after vim is open, and
@@ -302,6 +321,14 @@ nnoremap <Leader>r9 :res90<CR>
 nnoremap <Leader>m :exec 'match StatusLineTerm /' . expand('<cword>') . '/'<CR>
 nnoremap <Leader>M :exec 'match '<CR>
 
+
+" Run current file
+" This one isn't working for some reason
+"map <leader>w :w | ! %:p
+nnoremap <leader>w :w<CR>:! %:p<CR>
+"nmap <F13>:!python %:p
+"imap <F13> <Esc>:w<CR>:!python %:p
+"nmap <C-v><F2>:terminal
 
 
 " -- NOTES --

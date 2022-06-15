@@ -1,4 +1,5 @@
 # git
+alias glp='git pull --prune'
 alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
 alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
 alias gcoc='git reset && gco . && git clean -fd'
@@ -24,12 +25,22 @@ alias clean_docker="clean_docker_containers; clean_docker_images; clean_docker_i
 # node
 alias ns='npm start'
 alias nr='rm -rf node_modules'
-alias nri='rm -rf node_modules && npm install'
-alias nris='rm -rf node_modules && npm install && npm start'
+alias nri='nr && npm install'
+alias nris='nri && ns'
 alias nri-l='rm node_modules ; ni-l'
 
+#### EXPERIMENT
 # Find the latest modified file in directory
 #find . -type f -printf '%T@ %p\n' | sort -n | tail -1
+# Exclude node_modules
+#find . -type d -name node_modules -prune -o -type f -printf '%T@ %p\n' | sort -n | tail -1
+# Make print human readable with %t
+#find . -type d -name node_modules -prune -o -type f -printf '%T@ %t %p\n' | sort -n | tail -1
+# Offset second column 50 chars
+#find . -type d -name node_modules -prune -o -type f -printf '%-50p %t\n' | sort -n | tail -1
+# Exclude node_modules and .git
+#find . -type d -name node_modules -prune -o -name .git -prune -o -type f -printf '%T@ %-50p %t\n' | sort -n | tail -4
+#### END EXPERIMENT
 
 #find . -name node_modules -exec touch {}/.nosync \;  # adds .nosync file inside each directory called node_modules
 #NOTE: Not using this because eslint doesn't like the symlinked node_modules
@@ -46,6 +57,60 @@ function ni-l {
   mv node_modules $node_modules_path/
   ln -sF $node_modules_path/node_modules node_modules
 }
+
+#### EXPERIMENT
+# To be used by the next function
+function unpackproj {
+  source ~/.zshrc
+  cd ~/workspace/$1
+  rm -rf $2
+  tar xzf $2.tgz
+  cd $2
+  npm install
+}
+
+# NOTE: currently only works on projects 2 away from ~/workspace
+# $0 is the command (projsync) $1 is first arg $2 is second arg
+# SMARTEN get local workspace path to drop at
+# SMARTEN find which was updated most recently, local or remote
+function projsync {
+  if [ -z "$1" ] ; then
+    echo "Error: No arguments provided"
+    echo "Usage: projsync project_directory"
+  else
+    parent=`basename $(pwd)`
+    tar czf $1.tgz --exclude node_modules $1
+    if [ -z "$2" ] ; then
+      rsync -avzP $1.tgz tinytim:~/
+    else
+      rsync -avzP $1.tgz imac:~/workspace/$parent/
+      # -t and -i might not be required
+      ssh -t imac /opt/homebrew/bin/zsh -i -c "$(declare -f unpackproj); unpackproj $parent $1"
+    fi
+  fi
+}
+# will rsync combine my _testtube directories?
+
+# From https://stackoverflow.com/a/16623897/4394359
+# string='something'
+# prefix='some'
+# suffix='thing'
+# foo=${string#"$prefix"}  # remove prefix from string
+# bar=${string%"$suffix"}  # remove suffix from string
+#TODO unfinished
+function syncdiff {
+  #gd > /tmp/diff
+
+  # Get relative working direcotry (~/worspace/loope/loopewebapp)
+  homedir=$(cd ~ && pwd)
+  workdir=$(pwd)
+  reldir=${workdir#"$homedir"}  # expect /workspace/loope/loopewebapp
+  #reldir="~$reldir"
+  echo $reldir  # Expect ~/workspace/loope/loopewebapp
+
+  #
+}
+#### END EXPERIMENT
 
 
 # misc
@@ -67,7 +132,7 @@ alias curl_loope_function='curl https://us-central1-loop-60b76.cloudfunctions.ne
 alias deploy_loope_function='firebase deploy --only functions:sendTimelineEventNotification'
 alias deployloope='date ; deploy_loope_function ; date ; sleep 30 ; echo "curling" ; curl_loope_function ; date'
 
-############
+
 # mac system
 
 # Hide and show the desktop in Catalina
@@ -78,6 +143,7 @@ alias show_desktop='defaults write com.apple.finder CreateDesktop -bool true ; k
 # https://github.com/whomwah/qlstephen
 # defaults write com.whomwah.quicklookstephen maxFileSize 10000000
 
+#### EXPERIMENT
 function open_dev_workspace {
   open -g -a /Applications/Docker.app
   sleep 1
@@ -180,3 +246,4 @@ function open_dev_workspace {
 #     }
 #   }
 # };
+#### END EXPERIMENT
