@@ -251,7 +251,7 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_working_path_mode = 0
 
 " Set delay to prevent extra search
-let g:ctrlp_lazy_update = 150
+let g:ctrlp_lazy_update = 120
 
 " Do not clear filenames cache, to improve CtrlP startup
 " You can manualy clear it by <F5>

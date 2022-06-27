@@ -247,3 +247,9 @@ function open_dev_workspace {
 #   }
 # };
 #### END EXPERIMENT
+
+# VPN tunnel via ssh
+# https://www.howtogeek.com/168145/how-to-use-ssh-tunneling/
+# ssh -L 4040:localhost:4040 tinytim
+# then navigate to localhost:4040 locally to see the page from tinytim
+# END
