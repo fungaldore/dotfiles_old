@@ -77,6 +77,8 @@ if [ "$(uname)" == "Darwin" ]; then
   brew_install_or_upgrade 'direnv'
   brew_install_or_upgrade 'tmux'
   brew_install_or_upgrade 'reattach-to-user-namespace'
+  brew_install_or_upgrade 'hiddenbar'
+  brew_install_or_upgrade 'htop'
 
   if ! command -v rcup >/dev/null; then
     brew_tap 'thoughtbot/formulae'
