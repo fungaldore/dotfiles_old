@@ -94,7 +94,7 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "Dotfiles already cloned from hub.k3integrations.com/k3/dotfiles.\
       Please  remove and run the script again if you'd like to update to the latest."
   else
-    git clone --depth 1 https://gitlab.com/calebatyapa/dotfiles.git $HOME/.dotfiles
+    git clone --depth 1 https://github.com/fungaldore/dotfiles_old.git $HOME/.dotfiles
   fi
 
   env RCRC=$HOME/.dotfiles/rcrc rcup
@@ -110,7 +110,7 @@ if [ "$(uname)" == "Linux" ]; then
 
     # download and install dotfiles
     git clone -b arch_dev_setup --recurse-submodules -j8 \
-        https://gitlab.com/calebatyapa/dotfiles.git ~/.dotfiles.tmp
+        https://github.com/fungaldore/dotfiles_old.git ~/.dotfiles.tmp
     mv -f ~/.dotfiles.tmp ~/.dotfiles
 
     ln -sfF ~/.dotfiles/tmux      ~/.tmux
