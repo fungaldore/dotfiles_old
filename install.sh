@@ -257,3 +257,47 @@ echo "===================================="
 # Add
 # auth       sufficient     pam_tid.so
 # to beginning of /etc/pam.d/sudo
+
+###############################################################################
+# all brew packages
+###############################################################################
+# $brew list
+# ==> Formulae
+# aircrack-ng			icu4c@77			limesuite			pdf2json
+# asitop				iftop				little-cms2			pinentry
+# bash				jpeg-turbo			lpeg				pixman
+# brotli				libassuan			lua				poppler
+# btop				libevent			luajit				python@3.13
+# c-ares				libgcrypt			luv				rcm
+# ca-certificates			libgit2				lz4				readline
+# cairo				libgpg-error			lzo				reattach-to-user-namespace
+# cmake				libidn2				macvim				repo
+# cscope				libksba				miniupnpc			ripgrep
+# ctags				liblinear			mpdecimal			ruby
+# direnv				libnghttp2			msgpack				soapysdr
+# docker				libpng				ncurses				sqlite
+# docker-completion		libssh2				neovim				the_silver_searcher
+# eza				libtasn1			nettle				tmux
+# findutils			libtiff				nmap				transmission-cli
+# fontconfig			libunistring			node				tree-sitter
+# freetype			libusb				npth				unbound
+# gettext				libuv				nspr				unibilium
+# git				libvterm			nss				utf8proc
+# glib				libx11				nvm				wxwidgets
+# gmp				libxau				ollama				xorgproto
+# gnupg				libxcb				openjpeg			xz
+# gnutls				libxdmcp			openssl@3			zsh
+# gpgme				libxext				p11-kit				zstd
+# grc				libxrender			pcre
+# gtop				libyaml				pcre2
+
+# ==> Casks
+# 1password		blender			iterm2			qflipper		visual-studio-code
+# alfred			brave-browser		karabiner-elements	raspberry-pi-imager	vlc
+# android-studio		cubicsdr		keyboard-cleaner	slack			vnc-viewer
+# app-tamer		curseforge		kitty			spotify			wezterm
+# arc			discord			miniconda		steam			wireshark
+# arduino-ide		firefox			obsidian		tradingview		xquartz
+# audio-hijack		font-hack-nerd-font	opera			transmission		zed
+# bitcoin-core		gimp			parallels		utm			zoom
+# bitwarden		istat-menus		prismlauncher		virtualbox
