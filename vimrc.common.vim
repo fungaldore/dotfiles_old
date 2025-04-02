@@ -1,3 +1,4 @@
+"" colorscheme
 ""
 "" Settings common between vim and neovim
 ""
@@ -24,7 +25,7 @@ syntax enable         " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8    " Necessary to show unicode glyphs
 set laststatus=2      " Always show the statusline
 
-set pastetoggle=<F3>
+"set pastetoggle=<F3>
 let mapleader = "'"
 
 ""
@@ -138,7 +139,9 @@ set wildignore+=*.swp,*~,._*
 ""
 
 set backupdir^=~/.vim/_backup//    " where to put backup files.
-set directory^=~/.vim/_temp//      " where to put swap files."
+"set directory^=~/.vim/_temp//      " where to put swap files."
+" neovim vim-fugitive wasn't working properly because it was set to ~/.local/state/nvim/swap
+set directory=~/.local/share/nvim/swap
 
 """" Thanks Janus :)
 
@@ -710,3 +713,5 @@ nnoremap <leader>aiw :w ~/code/_testtube/chatgpt/.aichat<Left><Left><Left><Left>
 " :redir >> ~/mymaps.txt
 " :map
 " :redir END
+
+"let g:python3_host_prog='/opt/homebrew/Caskroom/miniconda/base/envs/neovim/bin/python'

@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'ap/vim-css-color'
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -47,6 +47,18 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'ryanoasis/vim-devicons' " Icons showing as chinese characters
 
+" Telescope fuzzy finder (AMAZING)
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim',
+" brew install ripgrep
+
+"PDF viewer
+" https://github.com/makerj/vim-pdf
+Plug 'makerj/vim-pdf'
+
+" Extend `ga` character inspector
+Plug 'tpope/vim-characterize'
+
 call plug#end()
 
 
@@ -84,4 +96,22 @@ vim.opt.listchars = { tab = "⇥ ", leadmultispace = "┊ ", trail = "␣", nbsp
     end
     vim.opt_local.listchars:append({ leadmultispace = lead })
   end
+
+-- https://github.com/nvim-telescope/telescope.nvim
+-- resume https://www.reddit.com/r/neovim/comments/phndpv/comment/hbjqio2/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Telescope find previous files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+-- Ignore node_modules directories
+require('telescope').setup{ 
+  defaults = { 
+    file_ignore_patterns = { 
+      "node_modules" 
+    }
+  }
+}
 EOF

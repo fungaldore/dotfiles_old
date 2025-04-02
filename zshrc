@@ -58,8 +58,8 @@ unsetopt auto_name_dirs
 [[ -a ~/.aliases ]] && source ~/.aliases
 
 #Fasd
-#eval "$(fasd --init auto)"
-#source <(fzf --zsh)
+eval "$(fasd --init auto)"
+#source <(fzf --zsh)  # replacement?
 
 # Direnv
 eval "$(direnv hook zsh)"
@@ -166,3 +166,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Make sure homebrew is in the beginning of the path so I don't end up using old versions of bash and zsh inside tmux
+# Troubleshooting: homebrew imports added in the oh-my-zsh.sh script when loading the brew plugin
+# Starting a new tmux shell reimports /usr/bin and such to the beginning before this file is loaded
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/Caskroom/miniconda/base/bin:/opt/homebrew/Caskroom/miniconda/base/condabin:$PATH
+#export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH

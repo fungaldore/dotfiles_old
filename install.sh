@@ -253,3 +253,7 @@ echo "===================================="
 # copy btt configs
 # copy istat menus configs
 # copy karabiner configs
+#
+# Add
+# auth       sufficient     pam_tid.so
+# to beginning of /etc/pam.d/sudo
