@@ -53,16 +53,16 @@ if [ "$(uname)" == "Darwin" ]; then
   # Install Homebrew and dependencies
   if ! command -v brew >/dev/null; then
     fancy_echo "Installing Homebrew ..."
-      curl -fsS \
-        'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       export PATH="/usr/local/bin:$PATH"
   else
     fancy_echo "Homebrew already installed. Skipping ..."
   fi
 
+  # CLI basics
   brew_install_or_upgrade 'zsh'
   brew_install_or_upgrade 'git'
-  brew_install_or_upgrade 'fasd'
+  #brew_install_or_upgrade 'fasd' # replaced by fzf?
   brew_install_or_upgrade 'the_silver_searcher'
   #TODO do we need macvim?
   # yes because powerline fonts error otherwise
@@ -71,14 +71,63 @@ if [ "$(uname)" == "Darwin" ]; then
   # https://www.google.com/search?q=vim+An+error+occurred+while+importing+powerline+module.&oq=vim+An+error+occurred+while+importing+powerline+module.&aqs=chrome..69i57j0l2.10231j0j1&sourceid=chrome&ie=UTF-8
   # https://github.com/powerline/powerline/issues/1385
   # brew_install_or_upgrade 'macvim' '--with-override-system-vim'
-  brew_install_or_upgrade 'macvim'
-  brew_install_or_upgrade 'ctags'
+  brew_install_or_upgrade 'btop'
   brew_install_or_upgrade 'cmake'
+  brew_install_or_upgrade 'ctags'
   brew_install_or_upgrade 'direnv'
-  brew_install_or_upgrade 'tmux'
+  brew_install_or_upgrade 'eza' # a better looking version of ls
+  brew_install_or_upgrade 'findutils' # to get gfind (gnu find)
+  brew_install_or_upgrade 'macvim'
+  brew_install_or_upgrade 'nvm'
+  brew_install_or_upgrade 'python'
+  #brew_install_or_upgrade 'neovim'
+  #pip3 install pynvim
   brew_install_or_upgrade 'reattach-to-user-namespace'
+  brew_install_or_upgrade 'tmux'
   brew_install_or_upgrade 'hiddenbar'
   brew_install_or_upgrade 'htop'
+
+  # The rest of my apps
+  #TODO make these work as brew install --cask opera etc.
+  brew_install_or_upgrade '1password'
+  brew_install_or_upgrade 'alfred'
+  brew_install_or_upgrade 'app-tamer'
+  brew_install_or_upgrade 'arc'
+  brew_install_or_upgrade 'arduino-ide'
+  brew_install_or_upgrade 'audio-hijack'
+  #brew_install_or_upgrade 'bettertouchtool' # 20250114 Throws SHA256 mismatch error. Proabably better to download this one from the internet manually for now.
+  brew_install_or_upgrade 'bitwarden'
+  brew_install_or_upgrade 'blender'
+  brew_install_or_upgrade 'brave-browser'
+  brew_install_or_upgrade 'copyclip'
+  brew_install_or_upgrade 'cubicsdr'
+  brew_install_or_upgrade 'curseforge'
+  brew_install_or_upgrade 'discord'
+  brew_install_or_upgrade 'docker'
+  brew_install_or_upgrade 'firefox'
+  brew_install_or_upgrade 'gimp'
+  brew_install_or_upgrade 'istat-menus'
+  brew_install_or_upgrade 'iterm2'
+  brew_install_or_upgrade 'karabiner-elements'
+  brew_install_or_upgrade 'keyboard-cleaner'
+  brew_install_or_upgrade 'kitty' # my new favorite terminal emulator
+  brew_install_or_upgrade 'obsidian'
+  brew_install_or_upgrade 'ollama'
+  brew_install_or_upgrade 'opera'
+  brew_install_or_upgrade 'parallels'
+  brew_install_or_upgrade 'prismlauncher'
+  brew_install_or_upgrade 'qflipper'
+  brew_install_or_upgrade 'raspberry-pi-imager'
+  brew_install_or_upgrade 'slack'
+  brew_install_or_upgrade 'spotify'
+  brew_install_or_upgrade 'steam'
+  brew_install_or_upgrade 'tradingview'
+  brew_install_or_upgrade 'visual-studio-code'
+  brew_install_or_upgrade 'vlc'
+  brew_install_or_upgrade 'vnc-viewer'
+  brew_install_or_upgrade 'xquartz'
+  brew_install_or_upgrade 'zed'
+  brew_install_or_upgrade 'zoom'
 
   if ! command -v rcup >/dev/null; then
     brew_tap 'thoughtbot/formulae'
@@ -121,16 +170,86 @@ if [ "$(uname)" == "Linux" ]; then
     ln -sfF ~/.dotfiles/zshrc     ~/.zshrc
     ln -sfF ~/.dotfiles/bashrc    ~/.bashrc
     ln -sfF ~/.dotfiles/aliases   ~/.aliases
-
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   fi
 fi
 
-# switch to zsh
-case "$SHELL" in
-  */zsh) : ;;
-  *)
-    fancy_echo "Changing your shell to zsh ..."
-      chsh -s "$(which zsh)"
-    ;;
-esac
+ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
+ln -sfF ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
+
+# Reset dock pinned items
+defaults write "com.apple.dock" "persistent-apps" -array; killall Dock
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggest
+
+
+## switch to zsh
+## Old method when zsh wasn't the default shell in macos
+##case "$SHELL" in
+##  */zsh) : ;;
+##  *)
+##    fancy_echo "Changing your shell to zsh ..."
+##      chsh -s "$(which zsh)"
+##    ;;
+#esac
+# New method now that macos ships with its own zsh
+# allow /opt/homebrew/bin/zsh to be used
+sudo echo "$(which zsh)" >> /etc/shells
+# set /opt/homebrew/bin/zsh as the default shell
+chsh -s "$(which zsh)"
+
+
+# mac keyboard repeat rate to something sensible
+# Source: https://apple.stackexchange.com/a/83923
+# beforehand
+#   defaults read -g InitialKeyRepeat is 15
+# and
+#   defaults read -g KeyRepeat is 2
+# using the fastest I can make it through the settings UI
+# I like 10 and 1 respectively
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
+
+# TODO Maybe install frida?
+# Source: https://notes.alinpanaitiu.com/Fullscreen%20apps%20above%20the%20MacBook%20notch
+# pip install frida-tools
+
+echo "/n"
+echo "===================================="
+echo 'Manual tasks at the end'
+echo 'see the install script for a list'
+echo "===================================="
+# download (keep downloaded) obsidian vault from icloud drive
+
+# sign in to firefox, arc
+# sync brave
+
+# install neovim, if this works move it into the automated portion of the script
+# brew install miniconda
+# conda init
+# restart session
+# pip install pynvim
+# brew install neovim
+# inside nvim
+#   :checkhealth (all good?)
+#   :PlugInstall
+# nvim should work now
+
+# copy over ~/.config and ~/.local/share/nvim
+# changes in these plugins, just copy whole directories for now
+# neovim (.vim/plugged) and vim (.vim/bundle)
+# - fogbell
+# - nerdcommenter
+# - vim-easymotion
+# - vim-illuminate
+
+# fix youcompleteme?
+# brew install cmake python go nodejs (use nvm for nodejs)
+
+# install my fonts, and script it
+# powerline, menlolig
+
+# copy iterm configs
+# copy btt configs
+# copy istat menus configs
+# copy karabiner configs

@@ -18,3 +18,5 @@ if filereadable($HOME . "/.gvimrc.local")
   source ~/.gvimrc.local
 endif
 
+set macligatures
+set guifont=Fira\ Code:h9

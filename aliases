@@ -1,10 +1,18 @@
 # git
+alias gd='LESS="-FIR" git diff'
+alias gsh='LESS="-FIR" git show'
+alias gpp='git pull --prune --no-tags'
 alias glp='git pull --prune'
 alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
 alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
 alias gcoc='git reset && gco . && git clean -fd'
+alias gbb='git bisect bad'
+alias gbg='git bisect good'
 function gstaa {
   git stash apply stash@{$1}
+}
+function gstss {
+  git stash show -P -u stash@{$1}
 }
 function gdu {
   (
@@ -12,6 +20,30 @@ function gdu {
       while read -r i; do git diff --color -- /dev/null "$i"; done
   ) | less
 }
+function patch {
+  gd $1 > /tmp/diff1 && vi /tmp/diff1
+}
+
+#alias lg1="log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+#alias lg2="log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+#alias lg=!"git lg1"
+
+# script to merge current branch into branch lab-dev01.opstel.cloud
+function mad {
+  destination_branch=$1
+  if [ -z "$destination_branch" ]; then
+    destination_branch='lab-dev01.opstel.cloud'
+  fi
+
+  current_branch=`git branch --show-current`
+  gco $destination_branch && gpp && git merge $current_branch && git tag -d $(git tag -l) && npm version prerelease && gp && gco $current_branch
+}
+
+#TODO make this function work with parameters
+# # If the user has more than 100 repos you'll have to adjust the page number
+# function git_clone_account {
+#   curl -s 'https://api.github.com/users/USERNAME/repos?page=1&per_page=100' | grep \"clone_url\" | awk '{print $2}' | sed -e 's/\"//g' -e 's/,//g' | xargs -n1 git clone
+# }
 
 # docker
 alias d='docker'
@@ -21,13 +53,27 @@ alias clean_docker_containers='docker ps -aq --no-trunc | xargs docker rm'
 alias clean_docker_images='docker images -qf dangling=true | xargs docker rmi'
 alias clean_docker_volumes='docker volume ls -qf dangling=true | xargs docker volume rm'
 alias clean_docker="clean_docker_containers; clean_docker_images; clean_docker_images"
+alias dclar="dc up nginx php-fpm workspace docker-in-docker mysql"
+# sh into docker engine
+# https://www.krenger.ch/blog/docker-desktop-for-mac-ssh-into-the-docker-vm/
+alias docker_engine_socat="socat -d -d ~/Library/Containers/com.docker.docker/Data/debug-shell.sock pty,rawer"
+alias docker_engine_screen="echo 'Example: screen /dev/ttys012'"
 
 # node
-alias ns='npm start'
 alias nr='rm -rf node_modules'
-alias nri='nr && npm install'
+alias ni='npm install'
+alias ns='npm start'
+alias nri='nr && ni'
 alias nris='nri && ns'
 alias nri-l='rm node_modules ; ni-l'
+
+# inspiration https://stackoverflow.com/a/52029101
+function cd {
+  builtin cd "$@"
+  if [[ -f .nvmrc ]]; then
+    nvm use > /dev/null
+  fi
+}
 
 #### EXPERIMENT
 # Find the latest modified file in directory
@@ -36,11 +82,22 @@ alias nri-l='rm node_modules ; ni-l'
 #find . -type d -name node_modules -prune -o -type f -printf '%T@ %p\n' | sort -n | tail -1
 # Make print human readable with %t
 #find . -type d -name node_modules -prune -o -type f -printf '%T@ %t %p\n' | sort -n | tail -1
-# Offset second column 50 chars
+# Offset second column 50 chars (sort is wrong though)
 #find . -type d -name node_modules -prune -o -type f -printf '%-50p %t\n' | sort -n | tail -1
 # Exclude node_modules and .git
 #find . -type d -name node_modules -prune -o -name .git -prune -o -type f -printf '%T@ %-50p %t\n' | sort -n | tail -4
 #### END EXPERIMENT
+
+alias find_latest="find . -type d -name node_modules -prune -o -name .git -prune -o -type f -printf '%-30T@ %-50p %t\n' | sort -n | tail -100"
+alias fl='find_latest'
+
+#
+# Commands to convert all import statements in Speed to use @/ before the path when importing local files.
+#find src -type f -exec perl -pi -e "s/ from '(?=$(join_by '|' $(ls -d src/*/ | perl -ne "s/src\/(.+)\//\1/g; print;")))/ from '@\//" {} \;
+#another strategy for joining directory names                    ls -d src/*/ | sed 's/src\/\(.*\)\//\1/g' | tr '\n' '|'
+
+# Find files not in, containing both terms
+#find . -type f -not -path "./__tests__/*" -exec grep -inq 'event' {} \; -exec grep -in --color="always" 'style' {} \; -print
 
 #find . -name node_modules -exec touch {}/.nosync \;  # adds .nosync file inside each directory called node_modules
 #NOTE: Not using this because eslint doesn't like the symlinked node_modules
@@ -113,14 +170,60 @@ function syncdiff {
 #### END EXPERIMENT
 
 
-# misc
-alias j='fasd_cd -d'
+# MISC
+alias cndd='conda deactivate'
+alias cnda='conda activate'
+#alias j='fasd_cd -d'
 alias nt='tmux new -s ${${PWD##*/}//./-}'
 alias ta='tmux attach -t ${${PWD##*/}//./-}'
+alias nvi='nvim'
+alias rsync='/usr/bin/rsync -avzpP'
 alias cdicloud='cd ~/Library/Mobile\ Documents/com\~apple\~CloudDocs'
 alias find='gfind'
-# exa - replacement for ls
-alias l='exa -lahF'
+# eza - replacement for ls (exa no longer maintaned https://stackoverflow.com/a/78737956)
+alias l='eza -lahF --icons'
+alias li='eza -lahF'
+# Try apple silicon location
+[ -s "/opt/homebrew/bin/speedtest" ] && alias speedtest="/opt/homebrew/bin/speedtest --secure"
+# Try intel location
+[ -s "/usr/local/bin/speedtest" ] && alias speedtest="/usr/local/bin/speedtest --secure"
+alias st='speedtest'
+#alias restart_coreaudio1="sudo kill -9 $(ps ax | grep coreaudiod | grep -v 'grep' | cut -d' ' -f1)"
+#alias restart_coreaudio2="sudo kill -9 $(ps ax | grep coreaudiod | grep -v 'grep' | cut -d' ' -f2)"
+#alias restart_coreaudio3="sudo kill -9 $(ps ax | grep coreaudiod | grep -v 'grep' | cut -d' ' -f3)"
+function restart_coreaudio {
+  psax=$(ps ax | grep 'coreaudio' | grep -v 'grep')
+  caid=${psax:0:5}
+  sudo kill -9 $caid
+}
+
+function vf {
+  vi $(fasd -f $1)
+}
+
+# Join strings
+function join_by {
+  local d=${1-} f=${2-}
+  if shift 2; then
+    printf %s "$f" "${@/#/$d}"
+  fi
+}
+
+# SSH into a thing and remove old record from known_hosts
+function ssh!() {
+  ssh-keygen -R $1
+  ssh $1
+}
+
+# Prevent music from capturing play button. Source: https://apple.stackexchange.com/a/373557
+#alias prevent_music_from_capturing_play_button="launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist"
+# I reloaded this because my play/pause button wasn't working for other apps anymore.
+
+# Adjust key repeat rate: https://apple.stackexchange.com/a/83923
+function setKeyRepeatShort {
+  defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+  defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+}
 
 # for Catalina - use macvim instead of default vim
 #alias vim='/usr/local/Cellar/macvim/8.1-151/MacVim.app/Contents/bin/vim'
@@ -253,3 +356,21 @@ function open_dev_workspace {
 # ssh -L 4040:localhost:4040 tinytim
 # then navigate to localhost:4040 locally to see the page from tinytim
 # END
+#
+# Another ssh trick (forwarding ports?)
+# ssh -d 8080 -C -N peaky
+#
+# Allow reverse ssh
+# ssh -R 43022:localhost:22 peaky
+# then ssh localhost:43022 from destination to get back in
+
+# Compress and encrypt file
+# tar czvpf - jake | openssl enc -aes-256-cbc -salt -out jake.tgz.enc -pass file:~/Downloads/enc.key.txt
+# Decrypt and decompress file
+# openssl enc -d -aes-256-cbc -in jake.tgz.enc -out - -pass file:~/Downloads/enc.key.txt | tar xzvf -
+
+# Process all pcap files
+# for i in *.pcap; do                                                                                                                     ──(Sun,Apr07)─┘
+#     echo "Processing $i"
+#     aircrack-ng -a2 -w ../pwnagotchi/allwords.txt "$i" > "output_$i" 2>/dev/null
+#done
