@@ -177,6 +177,7 @@ alias j='fasd_cd -d'
 alias nt='tmux new -s ${${PWD##*/}//./-}'
 alias ta='tmux attach -t ${${PWD##*/}//./-}'
 alias nvi='nvim'
+alias nvimmg="nvim -c 'VcsJump merge'"
 alias rsync='/usr/bin/rsync -avzpP'
 alias cdicloud='cd ~/Library/Mobile\ Documents/com\~apple\~CloudDocs'
 alias find='gfind'

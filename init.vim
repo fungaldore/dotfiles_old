@@ -59,6 +59,9 @@ Plug 'makerj/vim-pdf'
 " Extend `ga` character inspector
 Plug 'tpope/vim-characterize'
 
+" git conflicts https://medium.com/trabe/dealing-with-git-conflicts-using-vim-and-vcs-jump-4ab1316e4271
+Plug 'wincent/vcs-jump'
+
 call plug#end()
 
 
