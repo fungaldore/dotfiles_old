@@ -4,7 +4,7 @@ export EDITOR='nvim'
 #export EDITOR="zed" # doesn't save crontab file
 export LESS='-FINR'
 
-export PATH=/snap/bin:~/bin:/usr/local/share/npm/bin:$PATH
+export PATH=/snap/bin:~/bin:/usr/local/share/npm/bin:$HOME/code/_testtube/bin:$PATH
 
 #Setup go
 export GOPATH=$HOME/.go
