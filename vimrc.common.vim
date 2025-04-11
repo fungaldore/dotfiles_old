@@ -447,7 +447,8 @@ nnoremap <Leader>M :exec 'match '<CR>
 " Auto highlight markers and others (can only use 9 matches though)
 " source https://stackoverflow.com/questions/36868879/does-vim-have-a-character-limit-for-regexes
 "match Todo /\(FIXME\)\|\(TODO\)\|\(STARTHERE\)\|\(NOTE\)\|\(OPTIMIZE\)\|\(IDEA\)\|\(WIP\)\|\(TMP\)\|\(NOTRENDERED\)\|\(console.log\)\|\(console.debug\)\|\(debugger\)\|\(print\)\|\(pp\)\|\(byebug\)/
-au BufReadPost,BufNewFile * match Todo /\(FIXME\)\|\(TODO\)\|\(STARTHERE\)\|\(NOTE\)\|\(OPTIMIZE\)\|\(byebug\)\|\(console\.log\)\|\(DEBUG\)\|\(print\)/
+"au BufReadPost,BufNewFile * match Todo /\(FIXME\)\|\(TODO\)\|\(STARTHERE\)\|\(NOTE\)\|\(OPTIMIZE\)\|\(byebug\)\|\(console\.log\)\|\(DEBUG\)\|\(print\)/
+au BufReadPost,BufNewFile * match Todo /\(FIXME\)\|\(TODO\)\|\(STARTHERE\)\|\(NOTE\)\|\(<<<<<<< HEAD\)\|\(=======\)\|\(>>>>>>>\)\|\(console\.log\)\|\(DEBUG\)/
 
 
 " Run current file
