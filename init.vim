@@ -83,10 +83,45 @@ endif
 ""
 
 ""
-"" Power Line Config (airline)
+"" AirLine Config (lighter version of powerline)
 ""
-" Use powerline fonts for arrow separators
+"" Use powerline fonts for arrow separators
 let g:airline_powerline_fonts = 1
+""
+"" Smarter tab line
+let g:airline#extensions#tabline#enabled = 1
+"" No full paths
+let g:airline#extensions#tabline#formatter = 'short_path_improved'
+""
+"" Set theme
+"let g:airline_theme='deus'
+let g:airline_theme='powerlineish'
+"let g:airline_theme='tomorrow'
+"let g:airline_theme='papercolor'
+""
+"" Customize branch name in status line
+"let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#branch#format = 'CustomBranchName'
+function! CustomBranchName(name)
+  " Check if the name contains a slash and split accordingly
+  " feature/atm-responsive truncates to atm-responsive
+  if stridx(a:name, '/') != -1
+    let parts = split(a:name, '/')
+    let returnable = '…' . parts[-1]
+  else
+    " If there's no slash, check for a period and split on it
+    " lab-dev01.opstel.cloud truncates to lab-dev01
+    if stridx(a:name, '.') != -1
+      let parts = split(a:name, '\.')
+      let returnable = parts[0] . '…'
+    else
+      " If there are neither, just use the name as is
+      let returnable = a:name
+    endif
+  endif
+
+  return returnable
+endfunction
 
 
 " Lead Multispace
