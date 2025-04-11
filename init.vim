@@ -138,7 +138,8 @@ vim.opt.listchars = { tab = "⇥ ", leadmultispace = "┊ ", trail = "␣", nbsp
 -- https://github.com/nvim-telescope/telescope.nvim
 -- resume https://www.reddit.com/r/neovim/comments/phndpv/comment/hbjqio2/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+-- vim.keymap.set('n', '<leader>fd', builtin.find_files(require('telescope.themes').get_dropdown({})))
 vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Telescope find previous files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
@@ -150,6 +151,16 @@ require('telescope').setup{
     file_ignore_patterns = { 
       "node_modules" 
     }
+  },
+  pickers = {
+    find_files = {
+      -- theme = "dropdown",
+      winblend = 10,
+    }
   }
 }
 EOF
+
+nnoremap <Leader>f :lua require'telescope.builtin'.find_files()<cr>
+nnoremap <Leader>fd :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>
+nnoremap <Leader>fdg :lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<cr>
