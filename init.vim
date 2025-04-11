@@ -50,7 +50,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Telescope fuzzy finder (AMAZING)
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim',
-" brew install ripgrep
+" brew install ripgrep " Makes searching much faster
 
 "PDF viewer
 " https://github.com/makerj/vim-pdf

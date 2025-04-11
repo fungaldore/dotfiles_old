@@ -59,11 +59,17 @@ if [ "$(uname)" == "Darwin" ]; then
     fancy_echo "Homebrew already installed. Skipping ..."
   fi
 
+  brew_install_or_upgrade '1password'
+  brew_install_or_upgrade 'nordvpn'
+
+  #TODO pause
+
   # CLI basics
   brew_install_or_upgrade 'zsh'
   brew_install_or_upgrade 'git'
   #brew_install_or_upgrade 'fasd' # replaced by fzf?
   brew_install_or_upgrade 'the_silver_searcher'
+  brew_install_or_upgrade 'ripgrep' # for nvim telescope
   #TODO do we need macvim?
   # yes because powerline fonts error otherwise
   # or update python?
@@ -89,7 +95,6 @@ if [ "$(uname)" == "Darwin" ]; then
 
   # The rest of my apps
   #TODO make these work as brew install --cask opera etc.
-  brew_install_or_upgrade '1password'
   brew_install_or_upgrade 'alfred'
   brew_install_or_upgrade 'app-tamer'
   brew_install_or_upgrade 'arc'
@@ -99,11 +104,11 @@ if [ "$(uname)" == "Darwin" ]; then
   brew_install_or_upgrade 'bitwarden'
   brew_install_or_upgrade 'blender'
   brew_install_or_upgrade 'brave-browser'
-  brew_install_or_upgrade 'copyclip'
+  #brew_install_or_upgrade 'copyclip' # how to get v1?
   brew_install_or_upgrade 'cubicsdr'
   brew_install_or_upgrade 'curseforge'
   brew_install_or_upgrade 'discord'
-  brew_install_or_upgrade 'docker'
+  #brew_install_or_upgrade 'docker' # cask
   brew_install_or_upgrade 'firefox'
   brew_install_or_upgrade 'gimp'
   brew_install_or_upgrade 'istat-menus'
@@ -112,19 +117,23 @@ if [ "$(uname)" == "Darwin" ]; then
   brew_install_or_upgrade 'keyboard-cleaner'
   brew_install_or_upgrade 'kitty' # my new favorite terminal emulator
   brew_install_or_upgrade 'obsidian'
-  brew_install_or_upgrade 'ollama'
+  #brew_install_or_upgrade 'ollama' # cask
   brew_install_or_upgrade 'opera'
   brew_install_or_upgrade 'parallels'
   brew_install_or_upgrade 'prismlauncher'
   brew_install_or_upgrade 'qflipper'
   brew_install_or_upgrade 'raspberry-pi-imager'
+  brew_install_or_upgrade 'signal'
   brew_install_or_upgrade 'slack'
   brew_install_or_upgrade 'spotify'
   brew_install_or_upgrade 'steam'
   brew_install_or_upgrade 'tradingview'
+  brew_install_or_upgrade 'transmission'
   brew_install_or_upgrade 'visual-studio-code'
   brew_install_or_upgrade 'vlc'
   brew_install_or_upgrade 'vnc-viewer'
+  brew_install_or_upgrade 'wezterm'
+  #brew_install_or_upgrade 'wireshark' # cask
   brew_install_or_upgrade 'xquartz'
   brew_install_or_upgrade 'zed'
   brew_install_or_upgrade 'zoom'
@@ -180,7 +189,7 @@ ln -sfF ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
 defaults write "com.apple.dock" "persistent-apps" -array; killall Dock
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggest
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 
 ## switch to zsh
