@@ -276,6 +276,7 @@ if [ "$(uname)" == "Linux" ]; then
       *)
         echo "Changing your shell to zsh ..."
         echo "NOTE: Hit ctrl-d when this completes to finish install script"
+        echo "TODO script gets stuck here, so I just copied and pasted the rest of it"
           chsh -s "$(which zsh)"
         ;;
     esac

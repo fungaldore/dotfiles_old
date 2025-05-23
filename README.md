@@ -21,7 +21,7 @@ Install
     This [solarized](https://github.com/altercation/solarized) theme is an
     excellent choice for iTerm on Mac.
 
-1.  `curl -fsS https://gitlab.com/calebatyapa/dotfiles/raw/master/install.sh | sh`
+1.  `curl -fsS https://raw.githubusercontent.com/fungaldore/dotfiles_old/refs/heads/master/install.sh | bash`
 
     (Be patient, particularly when vim is installing its plugins.
     The `YouCompleteMe` plugin takes a minute.)
