@@ -173,6 +173,10 @@ if [ "$(uname)" == "Darwin" ]; then
   defaults write -g InitialKeyRepeat -int 10
   defaults write -g KeyRepeat -int 1
 
+  # oh-my-zsh plugins
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
   ## switch to zsh
   ## Old method when zsh wasn't the default shell in macos
   ##case "$SHELL" in
@@ -220,6 +224,14 @@ if [ "$(uname)" == "Darwin" ]; then
   # install my fonts, and script it
   # powerline, menlolig
 
+  # copy over ~/.config and ~/.local/share/nvim
+  # changes in these plugins, just copy whole directories for now
+  # neovim (.vim/plugged) and vim (.vim/bundle)
+  # - fogbell
+  # - nerdcommenter
+  # - vim-easymotion
+  # - vim-illuminate
+
   # copy iterm configs
   # copy btt configs
   # copy istat menus configs
@@ -232,7 +244,74 @@ fi
 
 if [ "$(uname)" == "Linux" ]; then
   if [ -f /etc/debian_version ] ; then
-    sudo apt install -y zsh tmux vim curl git
+    sudo apt update -qq && sudo apt install -y \
+      build-essential \
+      aptitude \
+      python3 \
+      zsh \
+      tmux \
+      curl \
+      git \
+      vim \
+      silversearcher-ag \
+      fasd \
+      btop \
+      htop \
+      direnv \
+      kitty \
+      python3-pynvim \
+      neovim
+
+    # Install oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    # oh-my-zsh plugins
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+    # switch to zsh
+    # Old method when zsh wasn't the default shell in macos
+    case "$SHELL" in
+      */zsh) : ;;
+      *)
+        echo "Changing your shell to zsh ..."
+        echo "NOTE: Hit ctrl-d when this completes to finish install script"
+          chsh -s "$(which zsh)"
+        ;;
+    esac
+
+    git clone https://github.com/fungaldore/dotfiles_old.git ~/.dotfiles
+
+    mkdir -p ~/.config/nvim
+    mkdir -p ~/.config/kitty
+    ln -sfF ~/.dotfiles/condarc           ~/.condarc
+    ln -sfF ~/.dotfiles/tmux.conf         ~/.tmux.conf
+    ln -sfF ~/.dotfiles/vimrc             ~/.vimrc
+    ln -sfF ~/.dotfiles/vimrc.common.vim  ~/.vimrc.common.vim
+    ln -sfF ~/.dotfiles/init.vim          ~/.config/nvim/init.vim
+    ln -sfF ~/.dotfiles/zshrc             ~/.zshrc
+    ln -sfF ~/.dotfiles/bashrc            ~/.bashrc
+    ln -sfF ~/.dotfiles/aliases           ~/.aliases
+    ln -sfF ~/.dotfiles/kitty.conf        ~/.config/kitty/kitty.conf
+
+    # Because powerline or oh-my-zsh still references python2
+    sudo ln -s /usr/bin/python3 /usr/bin/python
+
+    # Install powerline plugin for oh-my-zsh theme
+    mkdir -p .vim/bundle
+    git clone https://github.com/powerline/powerline ~/.vim/bundle/powerline
+
+    # Install vim-plug for neovim
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+    # Install neovim plugins
+    nvim -c "PlugInstall"
+
+    echo "\n"
+    echo "####################################################################"
+    echo "################ Reboot for changes to take affect #################"
+    echo "####################################################################"
   fi
 
   if [ "$(uname -r | grep 'MANJARO')" ]; then
@@ -258,17 +337,6 @@ if [ "$(uname)" == "Linux" ]; then
     ln -sfF ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
   fi
 fi
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-
-# copy over ~/.config and ~/.local/share/nvim
-# changes in these plugins, just copy whole directories for now
-# neovim (.vim/plugged) and vim (.vim/bundle)
-# - fogbell
-# - nerdcommenter
-# - vim-easymotion
-# - vim-illuminate
 
 ###############################################################################
 # all brew packages
