@@ -156,9 +156,85 @@ if [ "$(uname)" == "Darwin" ]; then
   fi
 
   env RCRC=$HOME/.dotfiles/rcrc rcup
+
+  ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
+
+  # Reset dock pinned items
+  defaults write "com.apple.dock" "persistent-apps" -array; killall Dock
+
+  # mac keyboard repeat rate to something sensible
+  # Source: https://apple.stackexchange.com/a/83923
+  # beforehand
+  #   defaults read -g InitialKeyRepeat is 15
+  # and
+  #   defaults read -g KeyRepeat is 2
+  # using the fastest I can make it through the settings UI
+  # I like 10 and 1 respectively
+  defaults write -g InitialKeyRepeat -int 10
+  defaults write -g KeyRepeat -int 1
+
+  ## switch to zsh
+  ## Old method when zsh wasn't the default shell in macos
+  ##case "$SHELL" in
+  ##  */zsh) : ;;
+  ##  *)
+  ##    fancy_echo "Changing your shell to zsh ..."
+  ##      chsh -s "$(which zsh)"
+  ##    ;;
+  #esac
+  # New method now that macos ships with its own zsh
+  # allow /opt/homebrew/bin/zsh to be used
+  sudo echo "$(which zsh)" >> /etc/shells
+  # set /opt/homebrew/bin/zsh as the default shell
+  chsh -s "$(which zsh)"
+
+
+  # TODO Maybe install frida?
+  # Source: https://notes.alinpanaitiu.com/Fullscreen%20apps%20above%20the%20MacBook%20notch
+  # pip install frida-tools
+
+  echo "/n"
+  echo "===================================="
+  echo 'Manual tasks at the end'
+  echo 'see the install script for a list'
+  echo "===================================="
+  # download (keep downloaded) obsidian vault from icloud drive
+
+  # sign in to firefox, arc
+  # sync brave
+
+  # install neovim, if this works move it into the automated portion of the script
+  # brew install miniconda
+  # conda init
+  # restart session
+  # pip install pynvim
+  # brew install neovim
+  # inside nvim
+  #   :checkhealth (all good?)
+  #   :PlugInstall
+  # nvim should work now
+
+  # fix youcompleteme?
+  # brew install cmake python go nodejs (use nvm for nodejs)
+
+  # install my fonts, and script it
+  # powerline, menlolig
+
+  # copy iterm configs
+  # copy btt configs
+  # copy istat menus configs
+  # copy karabiner configs
+  #
+  # Add
+  # auth       sufficient     pam_tid.so
+  # to beginning of /etc/pam.d/sudo
 fi
 
 if [ "$(uname)" == "Linux" ]; then
+  if [ -f /etc/debian_version ] ; then
+    sudo apt install -y zsh tmux vim curl git
+  fi
+
   if [ "$(uname -r | grep 'MANJARO')" ]; then
     pacman -Syu --noconfirm || \
     pacman -S --noconfirm sudo || \
@@ -179,70 +255,12 @@ if [ "$(uname)" == "Linux" ]; then
     ln -sfF ~/.dotfiles/zshrc     ~/.zshrc
     ln -sfF ~/.dotfiles/bashrc    ~/.bashrc
     ln -sfF ~/.dotfiles/aliases   ~/.aliases
+    ln -sfF ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
   fi
 fi
 
-ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
-ln -sfF ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
-
-# Reset dock pinned items
-defaults write "com.apple.dock" "persistent-apps" -array; killall Dock
-
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-
-
-## switch to zsh
-## Old method when zsh wasn't the default shell in macos
-##case "$SHELL" in
-##  */zsh) : ;;
-##  *)
-##    fancy_echo "Changing your shell to zsh ..."
-##      chsh -s "$(which zsh)"
-##    ;;
-#esac
-# New method now that macos ships with its own zsh
-# allow /opt/homebrew/bin/zsh to be used
-sudo echo "$(which zsh)" >> /etc/shells
-# set /opt/homebrew/bin/zsh as the default shell
-chsh -s "$(which zsh)"
-
-
-# mac keyboard repeat rate to something sensible
-# Source: https://apple.stackexchange.com/a/83923
-# beforehand
-#   defaults read -g InitialKeyRepeat is 15
-# and
-#   defaults read -g KeyRepeat is 2
-# using the fastest I can make it through the settings UI
-# I like 10 and 1 respectively
-defaults write -g InitialKeyRepeat -int 10
-defaults write -g KeyRepeat -int 1
-
-# TODO Maybe install frida?
-# Source: https://notes.alinpanaitiu.com/Fullscreen%20apps%20above%20the%20MacBook%20notch
-# pip install frida-tools
-
-echo "/n"
-echo "===================================="
-echo 'Manual tasks at the end'
-echo 'see the install script for a list'
-echo "===================================="
-# download (keep downloaded) obsidian vault from icloud drive
-
-# sign in to firefox, arc
-# sync brave
-
-# install neovim, if this works move it into the automated portion of the script
-# brew install miniconda
-# conda init
-# restart session
-# pip install pynvim
-# brew install neovim
-# inside nvim
-#   :checkhealth (all good?)
-#   :PlugInstall
-# nvim should work now
 
 # copy over ~/.config and ~/.local/share/nvim
 # changes in these plugins, just copy whole directories for now
@@ -251,21 +269,6 @@ echo "===================================="
 # - nerdcommenter
 # - vim-easymotion
 # - vim-illuminate
-
-# fix youcompleteme?
-# brew install cmake python go nodejs (use nvm for nodejs)
-
-# install my fonts, and script it
-# powerline, menlolig
-
-# copy iterm configs
-# copy btt configs
-# copy istat menus configs
-# copy karabiner configs
-#
-# Add
-# auth       sufficient     pam_tid.so
-# to beginning of /etc/pam.d/sudo
 
 ###############################################################################
 # all brew packages
