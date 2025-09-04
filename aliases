@@ -243,6 +243,40 @@ alias deploy_loope_function='firebase deploy --only functions:sendTimelineEventN
 alias deployloope='date ; deploy_loope_function ; date ; sleep 30 ; echo "curling" ; curl_loope_function ; date'
 
 
+###############################################################################
+# Sync projects to clouds
+###############################################################################
+function syncpushspeedfe {
+  pushd ~/code/opstel
+  echo "zipping"
+  zip -r speed-fe.zip speed-fe/ -x "speed-fe/node_modules/*" "speed-fe/test-results/*"
+  echo "copy zip to icloud"
+  rsync speed-fe.zip ~/Desktop/workspace/opstel/
+
+  # takes too long to copy whole project each time, rsync is quicker with individual files, but what about copying back down?
+  #echo "copy zip to peaky"
+  #rsync speed-fe.zip peaky:~/code/opstel/
+  popd
+
+  # Push to icloud
+  #rsync --exclude node_modules --exclude test-results . ~/Desktop/workspace/opstel/speed-fe
+  # Push to remote server
+  pushd ~/code/opstel/speed-fe
+  echo "sync to peaky"
+  rsync --exclude node_modules --exclude test-results . peaky:~/code/opstel/speed-fe
+  popd
+}
+
+function syncpullspeedfe {
+  pushd ~/code/opstel
+  zip -r speed-fe.bak.zip speed-fe/
+  echo "rsync from peaky"
+  rsync peaky:~/code/opstel/speed-fe ./
+  popd
+}
+# END #########################################################################
+
+
 # mac system
 
 # Hide and show the desktop in Catalina
