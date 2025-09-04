@@ -2,6 +2,7 @@
 alias gd='LESS="-FIR" git diff'
 alias gsh='LESS="-FIR" git show'
 alias gpp='git pull --prune --no-tags'
+alias gpps='git pull --prune --no-tags --autostash'
 alias glp='git pull --prune'
 alias gls='git log --color --graph --pretty=format:"%Cred%h %Cgreen%ai %Cblue%an%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'
 alias glc='git log --color --graph --pretty=format:"%Cred%h%Creset %Cgreen%ai %Cblue%an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative'  # end with commits (feature..master) to see what master has over feature
